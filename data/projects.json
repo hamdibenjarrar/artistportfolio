@@ -1,0 +1,221 @@
+{
+  "generatedAt": "2025-11-15T14:03:47.478Z",
+  "projects": [
+    {
+      "id": "p1",
+      "main": [
+        "/work/p1/p1.jpg"
+      ],
+      "detail": [
+        "/work/p1/detail/p1.detail1.jpg",
+        "/work/p1/detail/p2.d2.jpg"
+      ]
+    },
+    {
+      "id": "p2",
+      "main": [
+        "/work/p2/p2.jpg"
+      ],
+      "detail": [
+        "/work/p2/detail/IMG_8402_result.jpg",
+        "/work/p2/detail/IMG_8404_result.jpg",
+        "/work/p2/detail/IMG_8405_result.jpg",
+        "/work/p2/detail/IMG_8406_result.jpg",
+        "/work/p2/detail/IMG_8409_result.jpg"
+      ]
+    },
+    {
+      "id": "p3",
+      "main": [
+        "/work/p3/p3.jpg"
+      ],
+      "detail": [
+        "/work/p3/detail/p3d1.jpg",
+        "/work/p3/detail/p3d2.jpg",
+        "/work/p3/detail/p3d3.jpg",
+        "/work/p3/detail/p3d4.jpg",
+        "/work/p3/detail/p3d5.jpg",
+        "/work/p3/detail/p3d6.jpg",
+        "/work/p3/detail/p3d7.jpg",
+        "/work/p3/detail/p3d8.jpg"
+      ]
+    },
+    {
+      "id": "p4",
+      "main": [
+        "/work/p4/IMG_8369_result.jpg"
+      ],
+      "detail": [
+        "/work/p4/detail/IMG_8341_result.jpg",
+        "/work/p4/detail/IMG_8342_result.jpg",
+        "/work/p4/detail/IMG_8343_result.jpg",
+        "/work/p4/detail/IMG_8344_result.jpg",
+        "/work/p4/detail/IMG_8346_result.jpg",
+        "/work/p4/detail/IMG_8349_result.jpg",
+        "/work/p4/detail/IMG_8350_result.jpg",
+        "/work/p4/detail/IMG_8354_result.jpg",
+        "/work/p4/detail/IMG_8357_result.jpg",
+        "/work/p4/detail/IMG_8358_result.jpg",
+        "/work/p4/detail/IMG_8359_result.jpg",
+        "/work/p4/detail/IMG_8361_result.jpg",
+        "/work/p4/detail/IMG_8362_result.jpg",
+        "/work/p4/detail/IMG_8363_result.jpg",
+        "/work/p4/detail/IMG_8365_result.jpg",
+        "/work/p4/detail/IMG_8367_result.jpg",
+        "/work/p4/detail/IMG_8378_result.jpg"
+      ]
+    },
+    {
+      "id": "p5",
+      "main": [
+        "/work/p5/IMG_8329_result.jpg",
+        "/work/p5/p5.jpg"
+      ],
+      "detail": [
+        "/work/p5/detail/IMG_8257_result.jpg",
+        "/work/p5/detail/IMG_8261_result.jpg",
+        "/work/p5/detail/IMG_8272_result.jpg",
+        "/work/p5/detail/IMG_8273_result.jpg",
+        "/work/p5/detail/IMG_8279_result.jpg",
+        "/work/p5/detail/IMG_8281_result.jpg",
+        "/work/p5/detail/IMG_8291_result.jpg",
+        "/work/p5/detail/IMG_8295_result.jpg",
+        "/work/p5/detail/p5d1.jpg",
+        "/work/p5/detail/p5d2.jpg",
+        "/work/p5/detail/p5d3.jpg",
+        "/work/p5/detail/p5d4.jpg",
+        "/work/p5/detail/p5d5.jpg",
+        "/work/p5/detail/p5d6.jpg",
+        "/work/p5/detail/p5d7.jpg",
+        "/work/p5/detail/p5d8.jpg",
+        "/work/p5/detail/p5d9.jpg"
+      ]
+    },
+    {
+      "id": "p6",
+      "main": [
+        "/work/p6/IMG_8329_result.jpg",
+        "/work/p6/p6.jpg"
+      ],
+      "detail": [
+        "/work/p6/detail/IMG_8297_result.jpg",
+        "/work/p6/detail/IMG_8303_result.jpg",
+        "/work/p6/detail/IMG_8309_result.jpg",
+        "/work/p6/detail/IMG_8311_result.jpg",
+        "/work/p6/detail/IMG_8312_result.jpg",
+        "/work/p6/detail/IMG_8317_result.jpg",
+        "/work/p6/detail/p6d1.jpg",
+        "/work/p6/detail/p6d2.jpg",
+        "/work/p6/detail/p6d3.jpg",
+        "/work/p6/detail/p6d4.jpg",
+        "/work/p6/detail/p6d5.jpg"
+      ]
+    },
+    {
+      "id": "p7",
+      "main": [
+        "/work/p7/IMG_8209_result.jpg",
+        "/work/p7/IMG_8329_result.jpg"
+      ],
+      "detail": [
+        "/work/p7/detail/IMG_8193_result.jpg",
+        "/work/p7/detail/IMG_8196_result.jpg",
+        "/work/p7/detail/IMG_8197_result.jpg",
+        "/work/p7/detail/IMG_8200_result.jpg",
+        "/work/p7/detail/IMG_8202_result.jpg",
+        "/work/p7/detail/IMG_8203_result.jpg",
+        "/work/p7/detail/IMG_8211_result.jpg",
+        "/work/p7/detail/IMG_8212_result.jpg",
+        "/work/p7/detail/IMG_8213_result.jpg",
+        "/work/p7/detail/IMG_8214_result.jpg",
+        "/work/p7/detail/IMG_8217_result.jpg",
+        "/work/p7/detail/IMG_8219_result.jpg",
+        "/work/p7/detail/IMG_8221_result.jpg",
+        "/work/p7/detail/IMG_8223_result.jpg",
+        "/work/p7/detail/IMG_8229_result.jpg",
+        "/work/p7/detail/IMG_8233_result.jpg",
+        "/work/p7/detail/IMG_8236_result.jpg"
+      ]
+    },
+    {
+      "id": "p8",
+      "main": [
+        "/work/p8/IMG_8424_result.jpg"
+      ],
+      "detail": [
+        "/work/p8/detail/IMG_8426_result.jpg",
+        "/work/p8/detail/IMG_8429_result.jpg",
+        "/work/p8/detail/IMG_8431_result.jpg",
+        "/work/p8/detail/IMG_8432_result.jpg",
+        "/work/p8/detail/IMG_8435_result.jpg",
+        "/work/p8/detail/IMG_8436_result.jpg",
+        "/work/p8/detail/IMG_8437_result.jpg",
+        "/work/p8/detail/IMG_8438_result.jpg",
+        "/work/p8/detail/IMG_8439_result.jpg",
+        "/work/p8/detail/IMG_8440_result.jpg",
+        "/work/p8/detail/IMG_8442_result.jpg",
+        "/work/p8/detail/IMG_8443_result.jpg",
+        "/work/p8/detail/IMG_8444_result.jpg",
+        "/work/p8/detail/IMG_8521_result.jpg",
+        "/work/p8/detail/IMG_8529_result.jpg",
+        "/work/p8/detail/IMG_8534_result.jpg",
+        "/work/p8/detail/IMG_8536_result.jpg"
+      ]
+    },
+    {
+      "id": "p9",
+      "main": [
+        "/work/p9/IMG_8544._result.jpg",
+        "/work/p9/IMG_8565_result.jpg",
+        "/work/p9/IMG_8582_result.jpg",
+        "/work/p9/IMG_8588_result.jpg",
+        "/work/p9/IMG_8600(1)_result.jpg",
+        "/work/p9/IMG_8601_result.jpg",
+        "/work/p9/IMG_8621(1)_result.jpg"
+      ],
+      "detail": [
+        "/work/p9/detail/IMG_8545_result.jpg",
+        "/work/p9/detail/IMG_8547_result.jpg",
+        "/work/p9/detail/IMG_8551_result.jpg",
+        "/work/p9/detail/IMG_8553_result.jpg",
+        "/work/p9/detail/IMG_8556_result.jpg",
+        "/work/p9/detail/IMG_8561_result.jpg",
+        "/work/p9/detail/IMG_8563_result.jpg",
+        "/work/p9/detail/IMG_8566_result.jpg",
+        "/work/p9/detail/IMG_8571_result.jpg",
+        "/work/p9/detail/IMG_8572_result.jpg",
+        "/work/p9/detail/IMG_8574_result.jpg",
+        "/work/p9/detail/IMG_8577_result.jpg",
+        "/work/p9/detail/IMG_8579_result.jpg",
+        "/work/p9/detail/IMG_8581_result.jpg",
+        "/work/p9/detail/IMG_8583_result.jpg",
+        "/work/p9/detail/IMG_8587_result.jpg",
+        "/work/p9/detail/IMG_8589_result.jpg",
+        "/work/p9/detail/IMG_8591_result.jpg",
+        "/work/p9/detail/IMG_8592_result.jpg",
+        "/work/p9/detail/IMG_8593_result.jpg",
+        "/work/p9/detail/IMG_8594_result.jpg",
+        "/work/p9/detail/IMG_8595_result.jpg",
+        "/work/p9/detail/IMG_8596_result.jpg",
+        "/work/p9/detail/IMG_8598_result.jpg",
+        "/work/p9/detail/IMG_8599_result.jpg",
+        "/work/p9/detail/IMG_8600_result.jpg",
+        "/work/p9/detail/IMG_8602_result.jpg",
+        "/work/p9/detail/IMG_8603_result.jpg",
+        "/work/p9/detail/IMG_8604_result.jpg",
+        "/work/p9/detail/IMG_8605_result.jpg",
+        "/work/p9/detail/IMG_8607_result.jpg",
+        "/work/p9/detail/IMG_8608_result.jpg",
+        "/work/p9/detail/IMG_8609_result.jpg",
+        "/work/p9/detail/IMG_8610_result.jpg",
+        "/work/p9/detail/IMG_8611_result.jpg",
+        "/work/p9/detail/IMG_8615_result.jpg",
+        "/work/p9/detail/IMG_8616_result.jpg",
+        "/work/p9/detail/IMG_8617_result.jpg",
+        "/work/p9/detail/IMG_8619_result.jpg",
+        "/work/p9/detail/IMG_8620_result.jpg",
+        "/work/p9/detail/IMG_8621_result.jpg"
+      ]
+    }
+  ]
+}
