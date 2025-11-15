@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("http://localhost"),
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/logo.png', type: 'image/png' },
       { url: '/favicon.ico' },
     ],
   },
