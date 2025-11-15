@@ -20,6 +20,12 @@ export const metadata: Metadata = {
   title: "Yassine Radhouani — Architect & Artist",
   description: "An immersive architectural and fine art portfolio.",
   metadataBase: new URL("http://localhost"),
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico' },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -29,6 +35,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      </head>
       <body className={`${syne.variable} ${manrope.variable} antialiased bg-[#111] text-white font-body` }>
         <LanguageProvider>
           <main>{children}</main>

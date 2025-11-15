@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .butterfly-wing { fill: #1a1a1a; stroke: #00bcd4; stroke-width: 2; }
+      .butterfly-body { fill: #00bcd4; }
+    </style>
+  </defs>
+  
+  <!-- Left upper wing -->
+  <path class="butterfly-wing" d="M35,25 Q20,15 15,30 Q12,45 25,40 Q35,35 35,25 Z"/>
+  
+  <!-- Right upper wing -->
+  <path class="butterfly-wing" d="M65,25 Q80,15 85,30 Q88,45 75,40 Q65,35 65,25 Z"/>
+  
+  <!-- Left lower wing -->
+  <path class="butterfly-wing" d="M35,45 Q18,50 15,70 Q18,85 35,75 Q40,60 35,45 Z"/>
+  
+  <!-- Right lower wing -->
+  <path class="butterfly-wing" d="M65,45 Q82,50 85,70 Q82,85 65,75 Q60,60 65,45 Z"/>
+  
+  <!-- Body -->
+  <ellipse class="butterfly-body" cx="50" cy="50" rx="3" ry="25"/>
+  
+  <!-- Wing details -->
+  <path stroke="#00bcd4" stroke-width="1" fill="none" d="M25,30 Q30,25 35,30"/>
+  <path stroke="#00bcd4" stroke-width="1" fill="none" d="M65,30 Q70,25 75,30"/>
+  <path stroke="#00bcd4" stroke-width="1" fill="none" d="M25,55 Q30,50 35,55"/>
+  <path stroke="#00bcd4" stroke-width="1" fill="none" d="M65,55 Q70,50 75,55"/>
+  
+  <!-- Antennae -->
+  <path stroke="#00bcd4" stroke-width="1.5" fill="none" d="M47,25 Q45,20 43,18"/>
+  <path stroke="#00bcd4" stroke-width="1.5" fill="none" d="M53,25 Q55,20 57,18"/>
+  <circle fill="#00bcd4" cx="43" cy="18" r="1"/>
+  <circle fill="#00bcd4" cx="57" cy="18" r="1"/>
+</svg>
