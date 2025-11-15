@@ -1,5 +1,8 @@
-import GalleryP9 from "@/components/GalleryP9";
-
 export default function ProjectsPage() {
-  return <GalleryP9 />;
+  return (
+    <div className="min-h-screen bg-white p-8">
+      <h1 className="text-2xl font-bold">Projects</h1>
+      <p>Projects page is under construction.</p>
+    </div>
+  );
 }
