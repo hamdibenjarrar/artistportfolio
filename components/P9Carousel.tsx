@@ -1,93 +1,473 @@
 "use client";
 import NextImage from "next/image";
-import { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from "gsap";
 
-type P9Art = {
+type Portrait = {
   src: string;
-  titleEn: string; titleFr: string;
-  bioEn: string; bioFr: string;
 };
 
-export function P9Carousel({ images }: { images: string[] }) {
+type Collection = {
+  id: string;
+  titleEn: string;
+  titleFr: string;
+  mainCover: string;
+  portraits: Portrait[];
+  size: string;
+  medium: string;
+};
+
+// 7 Themed Collections
+const collections: Collection[] = [
+  {
+    id: "theme1",
+    titleEn: "Andalusian Poetry",
+    titleFr: "Poésie Andalouse",
+    mainCover: "/work/p9/1.1.jpg",
+    portraits: [
+      { src: "/work/p9/1.jpg" },
+      { src: "/work/p9/2.jpg" },
+      { src: "/work/p9/3.jpg" },
+      { src: "/work/p9/4.jpg" },
+      { src: "/work/p9/5.jpg" },
+      { src: "/work/p9/6.jpg" },
+      { src: "/work/p9/7.jpg" }
+    ],
+    size: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "theme2",
+    titleEn: "I Walk to You",
+    titleFr: "Je marche à toi",
+    mainCover: "/work/p9/2.2.jpg",
+    portraits: [
+      { src: "/work/p9/8.jpg" },
+      { src: "/work/p9/9.jpg" },
+      { src: "/work/p9/10.jpg" },
+      { src: "/work/p9/11.jpg" },
+      { src: "/work/p9/12.jpg" },
+      { src: "/work/p9/13.jpg" }
+    ],
+    size: "50 × 37 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "theme3",
+    titleEn: "Oh the Days",
+    titleFr: "Oh les jours",
+    mainCover: "/work/p9/3.3.jpg",
+    portraits: [
+      { src: "/work/p9/14.jpg" },
+      { src: "/work/p9/15.jpg" },
+      { src: "/work/p9/16.jpg" },
+      { src: "/work/p9/17.jpg" }
+    ],
+    size: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "theme4",
+    titleEn: "We Talked a Lot",
+    titleFr: "On a beaucoup parlé",
+    mainCover: "/work/p9/4.4.jpg",
+    portraits: [
+      { src: "/work/p9/18.jpg" },
+      { src: "/work/p9/19.jpg" },
+      { src: "/work/p9/20.jpg" },
+      { src: "/work/p9/21.jpg" },
+      { src: "/work/p9/22.jpg" },
+      { src: "/work/p9/23.jpg" }
+    ],
+    size: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "theme5",
+    titleEn: "I Write to You",
+    titleFr: "Je t'écris",
+    mainCover: "/work/p9/5.5.jpg",
+    portraits: [
+      { src: "/work/p9/24.jpg" },
+      { src: "/work/p9/25.jpg" },
+      { src: "/work/p9/26.jpg" },
+      { src: "/work/p9/27.jpg" },
+      { src: "/work/p9/28.jpg" },
+      { src: "/work/p9/29.jpg" }
+    ],
+    size: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "theme6",
+    titleEn: "Your Eyes",
+    titleFr: "Tes yeux",
+    mainCover: "/work/p9/6.6.jpg",
+    portraits: [
+      { src: "/work/p9/30.jpg" },
+      { src: "/work/p9/31.jpg" }
+    ],
+    size: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "theme7",
+    titleEn: "My Beautiful Love",
+    titleFr: "Mon bel amour",
+    mainCover: "/work/p9/7.7.jpg",
+    portraits: [
+      { src: "/work/p9/32.jpg" },
+      { src: "/work/p9/33.jpg" },
+      { src: "/work/p9/34.jpg" },
+      { src: "/work/p9/35.jpg" },
+      { src: "/work/p9/36.jpg" },
+      { src: "/work/p9/37.jpg" }
+    ],
+    size: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  }
+];
+
+// 4 Standalone portraits (remaining)
+const standalonePortraits: Portrait[] = [
+  { src: "/work/p9/1.jpg" },
+  { src: "/work/p9/2.jpg" },
+  { src: "/work/p9/3.jpg" },
+  { src: "/work/p9/4.jpg" }
+];
+
+export function P9Carousel() {
   const { lang } = useLanguage();
-  const data = useMemo(() => generateMetadata(images), [images]);
-  const [active, setActive] = useState<P9Art | null>(null);
+  const [activeCollection, setActiveCollection] = useState<Collection | null>(null);
+  const [currentPortraitIndex, setCurrentPortraitIndex] = useState(0);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const rows = useMemo(() => {
-    const perRow = Math.ceil(data.length / 2); // split into 2 rows
-    return [data.slice(0, perRow), data.slice(perRow)];
-  }, [data]);
+  // GSAP animation when portrait changes
+  useEffect(() => {
+    if (!imageRef.current || !activeCollection) return;
 
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(false);
+    const tl = gsap.timeline();
+    tl.fromTo(
+      imageRef.current,
+      { opacity: 0, scale: 0.95, rotateY: 10 },
+      { opacity: 1, scale: 1, rotateY: 0, duration: 0.5, ease: "power2.out" }
+    );
 
-  const updateScrollState = useCallback(() => {
-    const el = scrollRef.current; if (!el) return;
-    setCanLeft(el.scrollLeft > 5);
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 5);
+    return () => {
+      tl.kill();
+    };
+  }, [currentPortraitIndex, activeCollection]);
+
+  // GSAP stagger fade-in for cards on mount
+  useEffect(() => {
+    if (cardRefs.current.length === 0) return;
+
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return;
+      
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: index * 0.08,
+          ease: "power2.out"
+        }
+      );
+    });
   }, []);
 
-  useEffect(() => { updateScrollState(); }, [rows, updateScrollState]);
-
-  const scrollBy = (dir: 1 | -1) => {
-    const el = scrollRef.current; if (!el) return;
-    const first = el.querySelector('button[data-art-card]') as HTMLElement | null;
-    const cardWidth = first ? first.offsetWidth : 220;
-    el.scrollBy({ left: dir * (cardWidth * 3), behavior: 'smooth' });
+  const openCollection = (collection: Collection) => {
+    setActiveCollection(collection);
+    setCurrentPortraitIndex(0);
   };
 
-  const handleKey = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') setActive(null);
-  }, []);
+  const closeCollection = () => {
+    setActiveCollection(null);
+    setCurrentPortraitIndex(0);
+  };
+
+  const nextPortrait = () => {
+    if (!activeCollection) return;
+    setCurrentPortraitIndex((prev) => (prev + 1) % activeCollection.portraits.length);
+  };
+
+  const prevPortrait = () => {
+    if (!activeCollection) return;
+    setCurrentPortraitIndex(
+      (prev) => (prev - 1 + activeCollection.portraits.length) % activeCollection.portraits.length
+    );
+  };
+
+  const currentPortrait = activeCollection?.portraits[currentPortraitIndex];
 
   return (
-    <section className="py-20 bg-white" aria-label="Gallery" onKeyDown={handleKey}>
-      <div className="mx-auto max-w-[1400px] px-6">
-        <header className="flex items-baseline justify-between mb-12">
-          <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-[#111]" style={{ fontFamily: "var(--font-display)" }}>{lang==='fr'? 'Collection' : 'Collection'}</h2>
-          <span className="text-[11px] text-[#666]">{data.length} {lang==='fr'? 'œuvres':'works'}</span>
-        </header>
-        <div className="relative">
-          <HorizontalScroll scrollRef={scrollRef} onScroll={updateScrollState}>
-            <div className="flex flex-col gap-3 md:gap-4">
-              {rows.map((row, ri) => (
-                <div key={ri} className="flex gap-3 md:gap-4">
-                  {row.map(art => (
-                    <ArtCard key={art.src} art={art} lang={lang} onOpen={()=>setActive(art)} />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </HorizontalScroll>
-          <CarouselNav canLeft={canLeft} canRight={canRight} onLeft={()=>scrollBy(-1)} onRight={()=>scrollBy(1)} />
-        </div>
+    <section className="relative py-20 md:py-32 bg-white overflow-hidden">
+      {/* Subtle Background Decoration */}
+      <div className="absolute inset-0 pointer-events-none opacity-5">
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-[#C9A86A] blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-[#E6D8B4] blur-3xl" />
       </div>
-      <AnimatePresence>
-        {active && (
-          <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <button aria-label="Close" onClick={()=>setActive(null)} className="absolute inset-0 bg-white/90 backdrop-blur" />
-            <motion.div initial={{ scale:0.9, opacity:0 }} animate={{ scale:1, opacity:1 }} exit={{ scale:0.9, opacity:0 }} transition={{ duration:0.3 }} className="relative w-full max-w-lg md:max-w-xl rounded-xl border-2 border-[#E6D8B4] bg-white shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-              <div className="relative w-full shrink-0">
-                <div className="relative aspect-square md:aspect-4/3 bg-white">
-                  <NextImage src={active.src} alt={lang==='fr'? active.titleFr : active.titleEn} fill sizes="(min-width:768px) 50vw, 90vw" className="object-contain p-3 md:p-5" />
+
+      <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16 md:mb-20"
+        >
+          <h2
+            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-4 text-[#111]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            {lang === 'fr' ? 'Collections' : 'Collections'}
+          </h2>
+          <p className="text-sm text-[#666] uppercase tracking-widest">
+            {collections.length} {lang === 'fr' ? 'Thèmes' : 'Themes'}
+          </p>
+        </motion.div>
+
+        {/* Collections Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-20">
+          {collections.map((collection, index) => (
+            <motion.div
+              key={collection.id}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+              className="group cursor-pointer"
+              onClick={() => openCollection(collection)}
+            >
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-[#E6D8B4] bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                <NextImage
+                  src={collection.mainCover}
+                  alt={lang === 'fr' ? collection.titleFr : collection.titleEn}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                
+                {/* Overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <div className="text-white">
+                    <div className="text-xs opacity-70 mb-1">
+                      {collection.portraits.length} {lang === 'fr' ? 'œuvres' : 'works'}
+                    </div>
+                    <div className="text-sm font-semibold">
+                      {lang === 'fr' ? 'Voir la collection' : 'View collection'}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Count Badge */}
+                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[#111] px-3 py-1 rounded-full text-xs font-bold">
+                  {collection.portraits.length}
                 </div>
               </div>
-              <div className="px-5 md:px-7 py-4 md:py-6 bg-white shrink-0">
-                <h3 className="text-lg md:text-xl font-semibold text-[#111]">{lang==='fr'? active.titleFr : active.titleEn}</h3>
-                <p className="mt-1 text-sm text-[#666]">40 × 60 cm</p>
-                <p className="mt-2 text-xs md:text-sm leading-relaxed text-[#555]">{lang==='fr'? active.bioFr : active.bioEn}</p>
-                <div className="mt-4 flex flex-wrap items-center gap-4">
-                  <span className="relative flex items-center gap-1 text-[10px] font-medium text-[#0A7F38]">
-                    <span className="absolute inline-block size-2 rounded-full bg-emerald-500 animate-ping" />
-                    <span className="inline-block size-2 rounded-full bg-emerald-500 relative" /> {lang==='fr'? 'Disponible':'Available'}
-                  </span>
-                  <a href={`https://wa.me/21629123456?text=${encodeURIComponent((lang==='fr'? 'Intéressé par l\'œuvre: ' : 'Interested in artwork: ') + (lang==='fr'? active.titleFr : active.titleEn))}`} target="_blank" rel="noopener noreferrer" className="text-[11px] font-semibold underline underline-offset-4 text-[#111] hover:text-[#C9A86A]">
-                    {lang==='fr'? 'Contact':'Contact'}
-                  </a>
-                  <button onClick={()=>setActive(null)} className="ml-auto text-[11px] text-[#666] hover:text-[#111]">{lang==='fr'? 'Fermer':'Close'}</button>
+
+              {/* Collection Info */}
+              <div className="mt-3 px-1">
+                <h3
+                  className="text-base md:text-lg font-bold text-[#111] leading-tight mb-1"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {lang === 'fr' ? collection.titleFr : collection.titleEn}
+                </h3>
+                <p className="text-xs text-[#666]">{collection.size}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Standalone Portraits Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="border-t border-[#E6D8B4] pt-16"
+        >
+          <h3
+            className="text-2xl md:text-3xl font-bold text-[#111] mb-8 text-center"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            {lang === 'fr' ? 'Œuvres Individuelles' : 'Individual Works'}
+          </h3>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {standalonePortraits.map((portrait, index) => (
+              <motion.div
+                key={portrait.src}
+                whileHover={{ y: -5, scale: 1.03 }}
+                transition={{ duration: 0.3 }}
+                className="relative aspect-square rounded-xl overflow-hidden border border-[#E6D8B4] bg-white shadow hover:shadow-xl transition-shadow duration-300"
+              >
+                <NextImage
+                  src={portrait.src}
+                  alt={`Standalone ${index + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Collection Modal/Lightbox */}
+      <AnimatePresence>
+        {activeCollection && currentPortrait && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6"
+            onClick={closeCollection}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={closeCollection}
+                className="absolute top-4 right-4 z-20 bg-white/90 hover:bg-white backdrop-blur-sm text-[#111] rounded-full w-10 h-10 flex items-center justify-center transition-colors duration-200 shadow-lg"
+                aria-label="Close"
+              >
+                <span className="text-2xl leading-none">×</span>
+              </button>
+
+              <div className="grid md:grid-cols-2 h-full max-h-[90vh]">
+                {/* Left: Image Display */}
+                <div className="relative bg-gradient-to-br from-[#f5f5f5] to-white p-8 md:p-12 flex items-center justify-center">
+                  <div ref={imageRef} className="relative w-full h-full max-h-[60vh] md:max-h-full">
+                    <NextImage
+                      src={currentPortrait.src}
+                      alt={`${lang === 'fr' ? activeCollection.titleFr : activeCollection.titleEn} - ${currentPortraitIndex + 1}`}
+                      fill
+                      sizes="50vw"
+                      className="object-contain"
+                    />
+                  </div>
+
+                  {/* Navigation Arrows */}
+                  {activeCollection.portraits.length > 1 && (
+                    <>
+                      <button
+                        onClick={prevPortrait}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm text-[#111] p-3 rounded-full transition-all duration-200 shadow-lg hover:scale-110"
+                        aria-label="Previous"
+                      >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+
+                      <button
+                        onClick={nextPortrait}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm text-[#111] p-3 rounded-full transition-all duration-200 shadow-lg hover:scale-110"
+                        aria-label="Next"
+                      >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+
+                      {/* Image Counter */}
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-[#111]">
+                        {currentPortraitIndex + 1} / {activeCollection.portraits.length}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Right: Collection Info */}
+                <div className="p-8 md:p-10 overflow-y-auto bg-white">
+                  <div className="space-y-6">
+                    <div>
+                      <h2
+                        className="text-3xl md:text-4xl font-black leading-tight text-[#111] mb-2"
+                        style={{ fontFamily: "var(--font-display)" }}
+                      >
+                        {lang === 'fr' ? activeCollection.titleFr : activeCollection.titleEn}
+                      </h2>
+                      <p className="text-sm text-[#666] uppercase tracking-wide">
+                        {lang === 'fr' ? 'Collection' : 'Collection'}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3">
+                      <span className="px-4 py-2 bg-[#f5f5f5] text-[#111] text-sm rounded-full border border-[#E6D8B4]">
+                        {activeCollection.size}
+                      </span>
+                      <span className="px-4 py-2 bg-[#f5f5f5] text-[#111] text-sm rounded-full border border-[#E6D8B4]">
+                        {activeCollection.medium}
+                      </span>
+                      <span className="px-4 py-2 bg-emerald-50 text-emerald-700 text-sm rounded-full border border-emerald-200 flex items-center gap-2">
+                        <span className="inline-block size-2 rounded-full bg-emerald-500" />
+                        {lang === 'fr' ? 'Disponible' : 'Available'}
+                      </span>
+                    </div>
+
+                    <div className="h-px bg-gradient-to-r from-transparent via-[#E6D8B4] to-transparent" />
+
+                    <div>
+                      <h4 className="text-sm font-bold text-[#666] uppercase tracking-wider mb-4">
+                        {lang === 'fr' ? 'Œuvres dans cette collection' : 'Works in this collection'}
+                      </h4>
+                      <div className="grid grid-cols-4 gap-2">
+                        {activeCollection.portraits.map((portrait, index) => (
+                          <button
+                            key={portrait.src}
+                            onClick={() => setCurrentPortraitIndex(index)}
+                            className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                              currentPortraitIndex === index
+                                ? 'border-[#C9A86A] shadow-lg scale-105'
+                                : 'border-[#E6D8B4] hover:border-[#C9A86A]/50'
+                            }`}
+                          >
+                            <NextImage
+                              src={portrait.src}
+                              alt={`Preview ${index + 1}`}
+                              fill
+                              sizes="80px"
+                              className="object-cover"
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <motion.a
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      href={`https://wa.me/21629123456?text=${encodeURIComponent(
+                        (lang === 'fr' ? 'Intéressé par la collection: ' : 'Interested in collection: ') +
+                        (lang === 'fr' ? activeCollection.titleFr : activeCollection.titleEn)
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full px-6 py-4 bg-gradient-to-r from-[#C9A86A] to-[#E6D8B4] text-white text-center font-bold rounded-full transition-all duration-200 hover:shadow-xl"
+                      style={{ fontFamily: "var(--font-heading)" }}
+                    >
+                      {lang === 'fr' ? 'Contacter pour cette collection' : 'Contact About This Collection'}
+                    </motion.a>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -96,70 +476,4 @@ export function P9Carousel({ images }: { images: string[] }) {
       </AnimatePresence>
     </section>
   );
-}
-
-function HorizontalScroll({ children, scrollRef, onScroll }: { children: React.ReactNode; scrollRef: React.RefObject<HTMLDivElement | null>; onScroll: () => void }) {
-  return (
-    <div ref={scrollRef} onScroll={onScroll} className="overflow-x-auto scroll-snap-x" role="region" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-      <style jsx>{`
-        div::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-      {children}
-    </div>
-  );
-}
-
-function CarouselNav({ canLeft, canRight, onLeft, onRight }: { canLeft: boolean; canRight: boolean; onLeft: () => void; onRight: () => void }) {
-  return (
-    <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between">
-      <button disabled={!canLeft} onClick={onLeft} className="pointer-events-auto ml-1 rounded-full bg-white/80 backdrop-blur text-[#111] shadow px-2 py-2 disabled:opacity-30 hover:bg-white transition" aria-label="Previous" >
-        <span className="text-xs font-semibold">◀</span>
-      </button>
-      <button disabled={!canRight} onClick={onRight} className="pointer-events-auto mr-1 rounded-full bg-white/80 backdrop-blur text-[#111] shadow px-2 py-2 disabled:opacity-30 hover:bg-white transition" aria-label="Next" >
-        <span className="text-xs font-semibold">▶</span>
-      </button>
-    </div>
-  );
-}
-
-function ArtCard({ art, lang, onOpen }: { art: P9Art; lang: string; onOpen: () => void }) {
-  return (
-    <button data-art-card onClick={onOpen} className="group relative rounded-xl border border-[#E6D8B4] bg-white shadow-sm overflow-hidden focus:outline-none focus:ring-2 focus:ring-[#C9A86A] shrink-0 w-32 sm:w-36 md:w-40 lg:w-44">
-      <div className="relative aspect-square w-full bg-white">
-        <NextImage src={art.src} alt={lang==='fr'? art.titleFr : art.titleEn} fill sizes="176px" className="object-contain p-2 group-hover:scale-[1.04] transition duration-500" />
-        <div className="absolute inset-0 bg-white/5 group-hover:bg-white/0 transition" />
-      </div>
-      <div className="p-2.5 text-left">
-        <h3 className="text-[10px] font-semibold text-[#111] leading-tight line-clamp-2">{lang==='fr'? art.titleFr : art.titleEn}</h3>
-        <p className="mt-1 text-[8px] text-[#666]">40 × 60 cm</p>
-        <div className="mt-2 flex items-center justify-between">
-          <span className="relative flex items-center gap-1 text-[9px] font-medium text-[#0A7F38]">
-            <span className="absolute inline-block size-2 rounded-full bg-emerald-500 animate-ping" />
-            <span className="inline-block size-2 rounded-full bg-emerald-500 relative" /> {lang==='fr'? 'Disponible':'Available'}
-          </span>
-          <span className="text-[9px] font-medium underline underline-offset-4 text-[#111] group-hover:text-[#C9A86A]">{lang==='fr'? 'Voir':'View'}</span>
-        </div>
-      </div>
-    </button>
-  );
-}
-
-function generateMetadata(images: string[]): P9Art[] {
-  const adjectivesEn = ["Silent","Layered","Fractal","Measured","Drifting","Ascendant","Veiled","Rhythmic","Harmonic","Compressed","Elevated","Intersected"]; // no color words
-  const nounsEn = ["Axis","Field","Transit","Echo","Structure","Pulse","Memory","Plane","Threshold","Pattern","Module","Circuit"];
-  const adjectivesFr = ["Silencieux","Stratifié","Fractal","Mesuré","Flottant","Ascendant","Voilé","Rythmique","Harmonique","Compressé","Élevé","Intersecté"];
-  const nounsFr = ["Axe","Champ","Transit","Écho","Structure","Pulsation","Mémoire","Plan","Seuil","Motif","Module","Circuit"];
-  return images.map((src, i) => {
-    const aEn = adjectivesEn[i % adjectivesEn.length];
-    const nEn = nounsEn[i % nounsEn.length];
-    const aFr = adjectivesFr[i % adjectivesFr.length];
-    const nFr = nounsFr[i % nounsFr.length];
-    const titleEn = `${aEn} ${nEn}`;
-    const titleFr = `${aFr} ${nFr}`;
-    const bioEn = `${titleEn}. Geometric tension and spatial drift rendered as quiet rhythmic trace of motion.`;
-    const bioFr = `${titleFr}. Tension géométrique et dérive spatiale rendues comme trace rythmique silencieuse du mouvement.`;
-    return { src, titleEn, titleFr, bioEn, bioFr };
-  });
 }
