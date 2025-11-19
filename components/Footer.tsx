@@ -34,7 +34,7 @@ export default function Footer() {
         <div className="relative w-full h-full">
           <Image src="/work/book.jpeg" alt="" fill className="object-cover object-center" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-black/85 via-black/75 to-black/90"></div>
       </div>
       
       {/* About Section - New Story */}
@@ -51,7 +51,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-black tracking-tight mb-8 md:mb-12 text-transparent bg-clip-text bg-gradient-to-r from-white via-[#C9A86A] to-[#E6D8B4]"
+            className="text-3xl md:text-5xl font-black tracking-tight mb-8 md:mb-12 text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-[#E6D8B4]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {lang==='fr'?'À propos':'About'}
@@ -63,7 +63,7 @@ export default function Footer() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-base md:text-xl leading-relaxed font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
+              className="text-base md:text-xl leading-relaxed font-bold text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {lang==='fr'?
@@ -78,7 +78,7 @@ export default function Footer() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="text-base md:text-xl leading-relaxed font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#E6D8B4] via-white to-[#C9A86A]"
+              className="text-base md:text-xl leading-relaxed font-bold text-transparent bg-clip-text bg-linear-to-r from-[#E6D8B4] via-white to-[#C9A86A]"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {lang==='fr'?
@@ -93,7 +93,7 @@ export default function Footer() {
               whileInView={{ opacity: 1, scaleX: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
               viewport={{ once: true }}
-              className="h-1 w-32 md:w-48 bg-gradient-to-r from-[#C9A86A] to-[#E6D8B4]"
+              className="h-1 w-32 md:w-48 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4]"
             />
 
             <motion.p 
@@ -101,7 +101,7 @@ export default function Footer() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
               viewport={{ once: true }}
-              className="text-base md:text-xl leading-relaxed font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-[#C9A86A] to-white"
+              className="text-base md:text-xl leading-relaxed font-bold text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-white"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {lang==='fr'?
@@ -165,7 +165,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
+          className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 md:mb-6 text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
           style={{ fontFamily: "var(--font-display)" }}
         >
           {lang==='fr'?'Collaborons':"Let's collaborate"}

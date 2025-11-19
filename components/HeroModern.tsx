@@ -16,8 +16,8 @@ export default function HeroModern() {
           priority
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/20 to-black/40"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-black/30 via-black/20 to-black/40"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/20"></div>
       </div>
 
       {/* Geometric Elements */}
@@ -32,13 +32,13 @@ export default function HeroModern() {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, duration: 1.5 }}
-          className="absolute bottom-15 md:bottom-20 right-10 md:right-16 w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-[#C9A86A] to-[#E6D8B4] transform rotate-12"
+          className="absolute bottom-15 md:bottom-20 right-10 md:right-16 w-20 h-20 md:w-24 md:h-24 bg-linear-to-br from-[#C9A86A] to-[#E6D8B4] transform rotate-12"
         ></motion.div>
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1, duration: 1.2 }}
-          className="absolute top-[60%] right-8 w-2 h-48 bg-gradient-to-b from-[#C9A86A] to-transparent"
+          className="absolute top-[60%] right-8 w-2 h-48 bg-linear-to-b from-[#C9A86A] to-transparent"
         ></motion.div>
       </div>
 
@@ -52,7 +52,7 @@ export default function HeroModern() {
           <button
             aria-label="Language toggle"
             onClick={() => setLang(lang === 'en' ? 'fr' : 'en')}
-            className="group relative inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-[#C9A86A] to-[#E6D8B4] text-black font-bold text-xs tracking-wide uppercase hover:shadow-xl transition-all duration-300 transform hover:scale-105 rounded-sm"
+            className="group relative inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4] text-black font-bold text-xs tracking-wide uppercase hover:shadow-xl transition-all duration-300 transform hover:scale-105 rounded-sm"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             <span className="flex items-center gap-1">
@@ -82,7 +82,7 @@ export default function HeroModern() {
               className="text-4xl md:text-5xl lg:text-6xl font-black leading-none tracking-tight mb-4 md:mb-5"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#C9A86A] to-white">
+              <span className="block text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-white">
                 YASSINE
               </span>
               <span className="block text-white" style={{ fontFamily: "var(--font-heading)" }}>
@@ -96,18 +96,18 @@ export default function HeroModern() {
               transition={{ delay: 0.8, duration: 0.8 }}
               className="flex items-center gap-3 mb-5 md:mb-6"
             >
-              <div className="w-12 md:w-16 h-0.5 bg-gradient-to-r from-[#C9A86A] to-[#E6D8B4]"></div>
+              <div className="w-12 md:w-16 h-0.5 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4]"></div>
               <p className="text-base md:text-lg lg:text-xl font-light tracking-widest uppercase text-[#C9A86A]" style={{ fontFamily: "var(--font-heading)" }}>
                 ARTIST
               </p>
-              <div className="w-12 md:w-16 h-0.5 bg-gradient-to-r from-[#E6D8B4] to-[#C9A86A]"></div>
+              <div className="w-12 md:w-16 h-0.5 bg-linear-to-r from-[#E6D8B4] to-[#C9A86A]"></div>
             </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              className="max-w-md text-base md:text-lg font-bold leading-relaxed text-transparent bg-clip-text bg-gradient-to-r from-[#C9A86A] via-white to-[#E6D8B4]" 
+              className="max-w-md text-base md:text-lg font-bold leading-relaxed text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]" 
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {lang === 'fr' ? 
@@ -130,7 +130,7 @@ export default function HeroModern() {
               className="text-5xl font-black tracking-tight leading-none mb-6"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#C9A86A] to-white">
+              <span className="block text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-white">
                 YASSINE
               </span>
               <span className="block text-white" style={{ fontFamily: "var(--font-heading)" }}>
@@ -148,7 +148,7 @@ export default function HeroModern() {
                 initial={{ width: 0 }}
                 animate={{ width: "3rem" }}
                 transition={{ duration: 1.2, delay: 0.8 }}
-                className="h-1 bg-gradient-to-r from-[#C9A86A] to-[#E6D8B4]"
+                className="h-1 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4]"
               />
               <h2 
                 className="text-lg font-light tracking-[0.15em] uppercase text-[#C9A86A]" 
@@ -159,7 +159,7 @@ export default function HeroModern() {
             </motion.div>
 
             <p 
-              className="text-lg font-bold leading-relaxed max-w-md text-transparent bg-clip-text bg-gradient-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
+              className="text-lg font-bold leading-relaxed max-w-md text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {lang === 'fr' ? 
