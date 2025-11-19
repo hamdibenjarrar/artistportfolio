@@ -13,19 +13,11 @@ type Artwork = {
   descEn: string;
   descFr: string;
   dimensions: string;
+  medium?: string;
+  collection?: string;
 };
 
 const artworks: Artwork[] = [
-  {
-    id: "p1",
-    mainImage: "/work/p1/p1.jpg",
-    detailImages: ["/work/p1/detail/p1.detail1.jpg", "/work/p1/detail/p2.d2.jpg"],
-    titleEn: "Intersected Circuit",
-    titleFr: "Circuit Intersecté",
-    descEn: "A minimalist exploration of geometric intersections, where linear pathways converge and diverge in architectural harmony.",
-    descFr: "Une exploration minimaliste des intersections géométriques, où les voies linéaires convergent et divergent en harmonie architecturale.",
-    dimensions: "40 × 60 cm"
-  },
   {
     id: "p2",
     mainImage: "/work/p2/p2.jpg",
@@ -36,11 +28,12 @@ const artworks: Artwork[] = [
       "/work/p2/detail/IMG_8406_result.jpg",
       "/work/p2/detail/IMG_8409_result.jpg"
     ],
-    titleEn: "Silent Axis",
-    titleFr: "Axe Silencieux",
-    descEn: "Vertical and horizontal elements create a meditative balance, exploring the quietude found in perpendicular precision.",
-    descFr: "Les éléments verticaux et horizontaux créent un équilibre méditatif, explorant la quiétude trouvée dans la précision perpendiculaire.",
-    dimensions: "40 × 60 cm"
+    titleEn: "Melodic Resonance",
+    titleFr: "Résonance Mélodique",
+    descEn: "An exploration of chromatic vibrations where color sings across the canvas. Inspired by the phrase 'It's with you that I want to sing,' this work captures the harmony between presence and expression, transforming emotion into visual rhythm.",
+    descFr: "Une exploration des vibrations chromatiques où la couleur chante à travers la toile. Inspirée par la phrase 'C'est avec toi que je veux chanter', cette œuvre capture l'harmonie entre présence et expression, transformant l'émotion en rythme visuel.",
+    dimensions: "100 × 130 cm",
+    medium: "Acrylique sur toile"
   },
   {
     id: "p3",
@@ -53,11 +46,12 @@ const artworks: Artwork[] = [
       "/work/p3/detail/p3d5.jpg",
       "/work/p3/detail/p3d6.jpg"
     ],
-    titleEn: "Layered Field",
-    titleFr: "Champ Stratifié",
-    descEn: "Overlapping planes and translucent forms evoke depth and spatial ambiguity in a constrained frame.",
-    descFr: "Les plans superposés et les formes translucides évoquent la profondeur et l'ambiguïté spatiale dans un cadre contraint.",
-    dimensions: "40 × 60 cm"
+    titleEn: "The Craziest Journey",
+    titleFr: "Odyssée Intérieure",
+    descEn: "A visual journey through abstract landscapes and shifting forms. This piece embodies the unpredictable path of artistic exploration, where structure dissolves into movement and discovery unfolds in layers of color and gesture.",
+    descFr: "Un voyage visuel à travers des paysages abstraits et des formes mouvantes. Cette pièce incarne le chemin imprévisible de l'exploration artistique, où la structure se dissout dans le mouvement et la découverte se déploie en couches de couleur et de geste.",
+    dimensions: "83 × 83 cm",
+    medium: "Acrylique sur bois"
   },
   {
     id: "p4",
@@ -70,11 +64,12 @@ const artworks: Artwork[] = [
       "/work/p4/detail/IMG_8346_result.jpg",
       "/work/p4/detail/IMG_8349_result.jpg"
     ],
-    titleEn: "Fractal Transit",
-    titleFr: "Transit Fractal",
-    descEn: "Golden ratios and recursive patterns emerge from mathematical precision, celebrating the beauty of structured chaos.",
-    descFr: "Les ratios d'or et les motifs récursifs émergent de la précision mathématique, célébrant la beauté du chaos structuré.",
-    dimensions: "40 × 60 cm"
+    titleEn: "Tribute to Hédi Habouba",
+    titleFr: "Hommage au Roi Hédi Habouba",
+    descEn: "A portrait that transcends representation to capture the spirit of Tunisian musical heritage. Through layered textures and vibrant tones, this work celebrates the legendary musician Hédi Habouba, transforming sound into visual poetry.",
+    descFr: "Un portrait qui transcende la représentation pour capturer l'esprit du patrimoine musical tunisien. À travers des textures superposées et des tons vibrants, cette œuvre célèbre le légendaire musicien Hédi Habouba, transformant le son en poésie visuelle.",
+    dimensions: "130 × 90 cm",
+    medium: "Acrylique sur toile"
   },
   {
     id: "p5",
@@ -87,11 +82,13 @@ const artworks: Artwork[] = [
       "/work/p5/detail/p5d5.jpg",
       "/work/p5/detail/p5d6.jpg"
     ],
-    titleEn: "Measured Echo",
-    titleFr: "Écho Mesuré",
-    descEn: "Repetition with subtle variation creates rhythm and resonance, like architectural echoes across space.",
-    descFr: "La répétition avec variation subtile crée rythme et résonance, comme des échos architecturaux à travers l'espace.",
-    dimensions: "40 × 60 cm"
+    titleEn: "The Soul of Days I",
+    titleFr: "L'Âme des Jours I",
+    descEn: "First piece of the trilogy 'The Soul of Days.' Arabic calligraphy of the word 'days' dissolves into abstract form, exploring the passage of time through gestural marks. Each stroke carries memory, each layer holds a moment suspended.",
+    descFr: "Première pièce de la trilogie 'L'Âme des Jours'. La calligraphie arabe du mot 'jours' se dissout en forme abstraite, explorant le passage du temps à travers des marques gestuelles. Chaque trait porte la mémoire, chaque couche retient un instant suspendu.",
+    dimensions: "83 × 83 cm",
+    medium: "Acrylique sur bois",
+    collection: "L'âme des jours"
   },
   {
     id: "p6",
@@ -103,11 +100,13 @@ const artworks: Artwork[] = [
       "/work/p6/detail/p6d4.jpg",
       "/work/p6/detail/p6d5.jpg"
     ],
-    titleEn: "Drifting Structure",
-    titleFr: "Structure Flottante",
-    descEn: "Rigid geometry meets organic flow, capturing the tension between order and movement.",
-    descFr: "La géométrie rigide rencontre le flux organique, capturant la tension entre l'ordre et le mouvement.",
-    dimensions: "40 × 60 cm"
+    titleEn: "The Soul of Days II",
+    titleFr: "L'Âme des Jours II",
+    descEn: "Second piece of the trilogy. A refined interpretation of the same calligraphic theme, where delicate lines and subtle variations speak to the fragility and beauty of everyday existence. The writing becomes breath, the form becomes presence.",
+    descFr: "Deuxième pièce de la trilogie. Une interprétation raffinée du même thème calligraphique, où des lignes délicates et des variations subtiles parlent de la fragilité et de la beauté de l'existence quotidienne. L'écriture devient souffle, la forme devient présence.",
+    dimensions: "83 × 83 cm",
+    medium: "Acrylique sur bois",
+    collection: "L'âme des jours"
   },
   {
     id: "p7",
@@ -120,11 +119,13 @@ const artworks: Artwork[] = [
       "/work/p7/detail/IMG_8202_result.jpg",
       "/work/p7/detail/IMG_8203_result.jpg"
     ],
-    titleEn: "Veiled Memory",
-    titleFr: "Mémoire Voilée",
-    descEn: "Obscured forms and layered transparencies invite interpretation, like fragments of remembered spaces.",
-    descFr: "Les formes obscurcies et les transparences superposées invitent à l'interprétation, comme des fragments d'espaces mémorisés.",
-    dimensions: "40 × 60 cm"
+    titleEn: "The Soul of Days III",
+    titleFr: "L'Âme des Jours III",
+    descEn: "Final piece of the trilogy. 'Your soul is somewhere'—a contemplation on presence and absence. Layers of paint and gesture create a space where the visible and invisible meet, where the soul of time reveals itself in silence.",
+    descFr: "Pièce finale de la trilogie. 'Ton âme est quelque part'—une contemplation sur la présence et l'absence. Des couches de peinture et de geste créent un espace où le visible et l'invisible se rencontrent, où l'âme du temps se révèle dans le silence.",
+    dimensions: "83 × 83 cm",
+    medium: "Acrylique sur toile",
+    collection: "L'âme des jours"
   },
   {
     id: "p8",
@@ -137,11 +138,12 @@ const artworks: Artwork[] = [
       "/work/p8/detail/IMG_8435_result.jpg",
       "/work/p8/detail/IMG_8436_result.jpg"
     ],
-    titleEn: "Ascendant Pulse",
-    titleFr: "Pulsation Ascendante",
-    descEn: "Rising elements and dynamic diagonals suggest upward motion and aspiration within stillness.",
-    descFr: "Les éléments ascendants et les diagonales dynamiques suggèrent un mouvement ascendant et une aspiration dans l'immobilité.",
-    dimensions: "40 × 60 cm"
+    titleEn: "Infinity of Time and Space",
+    titleFr: "L'Infini du Temps et de l'Espace",
+    descEn: "An exploration of boundlessness through geometric abstraction. Forms expand and contract, suggesting cosmic rhythms and eternal cycles. This work invites contemplation on our place within the infinite dance of existence.",
+    descFr: "Une exploration de l'illimité à travers l'abstraction géométrique. Les formes se dilatent et se contractent, suggérant des rythmes cosmiques et des cycles éternels. Cette œuvre invite à la contemplation sur notre place au sein de la danse infinie de l'existence.",
+    dimensions: "83 × 83 cm",
+    medium: "Acrylique sur toile"
   }
 ];
 
@@ -165,12 +167,12 @@ export function FeaturedWorks() {
             className="text-center mb-12 md:mb-16"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              {lang === 'fr' ? 'Œuvres Sélectionnées' : 'Featured Works'}
+              {lang === 'fr' ? 'Œuvres' : 'Work'}
             </h2>
             <p className="text-sm md:text-base text-white/60 max-w-2xl mx-auto">
               {lang === 'fr' 
-                ? 'Une collection de pièces architecturales explorant la géométrie, l\'espace et le mouvement.'
-                : 'A collection of architectural pieces exploring geometry, space, and movement.'}
+                ? 'Une collection de pièces explorant la matière, le geste et l\'émotion.'
+                : 'A collection of pieces exploring material, gesture, and emotion.'}
             </p>
           </motion.div>
 
@@ -270,7 +272,21 @@ export function FeaturedWorks() {
                         {lang === 'fr' ? activeWork.titleFr : activeWork.titleEn}
                       </h2>
 
-                      <p className="text-sm text-white/60 mb-4">{activeWork.dimensions}</p>
+                      {activeWork.collection && (
+                        <p className="text-xs italic text-[#C9A86A] mb-2">
+                          {lang === 'fr' ? 'Collection: ' : 'Collection: '}{activeWork.collection}
+                        </p>
+                      )}
+
+                      <div className="flex flex-wrap gap-3 text-sm text-white/60 mb-4">
+                        <span>{activeWork.dimensions}</span>
+                        {activeWork.medium && (
+                          <>
+                            <span>•</span>
+                            <span>{activeWork.medium}</span>
+                          </>
+                        )}
+                      </div>
 
                       <p className="text-sm md:text-base leading-relaxed text-white/80 mb-6">
                         {lang === 'fr' ? activeWork.descFr : activeWork.descEn}

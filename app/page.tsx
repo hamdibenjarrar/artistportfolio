@@ -55,8 +55,8 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white">
       <HeroModern />
-      <P9Carousel images={p9Images} />
       <FeaturedWorks />
+      <P9Carousel images={p9Images} />
     </main>
   );
 }

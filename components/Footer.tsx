@@ -67,9 +67,9 @@ export default function Footer() {
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {lang==='fr'?
-                'Entre gestes, matières et silence, mon chemin s\'est construit autour d\'un besoin constant : comprendre le monde en le façonnant. Très jeune, la création est devenue mon refuge. Observer, transformer, donner une forme à ce qui m\'inspire… tout a commencé là.'
+                'Né en 1981 entre Gabès et El Kef, le regard s\'est forgé dans un univers de contrastes : le relief du Nord, la lumière du Sud. Le scoutisme a marqué l\'enfance : apprendre à écouter, à fabriquer, à créer avec les mains et à travailler en équipe. C\'est là que la curiosité pour la matière a commencé.'
                 :
-                'Between gestures, materials, and silence, my path has been built around a constant need: to understand the world by shaping it. From a very young age, creation became my refuge. Observing, transforming, giving form to what inspires me... it all began there.'
+                'Born in 1981 between Gabès and El Kef, vision was forged in a universe of contrasts: the relief of the North, the light of the South. Scouting marked childhood: learning to listen, to build, to create with hands, and to work as a team. That\'s where curiosity for materials began.'
               }
             </motion.p>
 
@@ -82,9 +82,9 @@ export default function Footer() {
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {lang==='fr'?
-                'Les années ont simplement affiné ce lien : savoir écouter un matériau, sentir une texture, lire une lumière. L\'architecture m\'a appris à organiser l\'espace ; l\'art, lui, m\'a rappelé que certaines émotions ne se construisent pas, elles se révèlent.'
+                'L\'adolescence a pris des couleurs nouvelles : dessins, ateliers, culture visuelle… jusqu\'à ce que la Russie ouvre un autre chapitre — un pays de culture, d\'art et de musique qui a profondément affiné son sens du rythme visuel, de la précision et de l\'espace.'
                 :
-                'The years have simply refined this connection: knowing how to listen to a material, feel a texture, read a light. Architecture taught me to organize space; art reminded me that certain emotions cannot be constructed—they reveal themselves.'
+                'Adolescence took on new colors: drawings, workshops, visual culture... until Russia opened another chapter—a country of culture, art, and music that profoundly refined the sense of visual rhythm, precision, and space.'
               }
             </motion.p>
 
@@ -105,9 +105,9 @@ export default function Footer() {
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {lang==='fr'?
-                'Au fil du temps, chaque rencontre a laissé une trace — mais certaines transforment profondément. Collaborer avec Rachid Koraïchi sur Le Jardin d\'Afrique a été plus qu\'un projet : une expérience humaine, spirituelle, presque silencieuse… qui m\'a rappelé que l\'art peut porter la mémoire, la dignité et la paix.'
+                'Les années ont façonné une sensibilité particulière : une manière de donner une voix aux matériaux, de faire respirer les formes, de chercher la poésie dans la construction. Certains projets ont d\'ailleurs reçu une reconnaissance internationale, notamment un travail ayant figuré parmi les références saluées par la Directrice générale de l\'UNESCO, Audrey Azoulay, ainsi que par la Fondation Aga Khan en 2022.'
                 :
-                'Over time, each encounter has left a trace—but some transform us profoundly. Collaborating with Rachid Koraïchi on Le Jardin d\'Afrique was more than a project: a human, spiritual, almost silent experience... that reminded me that art can carry memory, dignity, and peace.'
+                'The years have shaped a particular sensitivity: a way of giving voice to materials, making forms breathe, seeking poetry in construction. Some projects have received international recognition, notably work featured among the references praised by UNESCO Director-General Audrey Azoulay, as well as by the Aga Khan Foundation in 2022.'
               }
             </motion.p>
 
@@ -120,9 +120,9 @@ export default function Footer() {
               style={{ fontFamily: "var(--font-display)" }}
             >
               {lang==='fr'?
-                'Cette création a ouvert un nouvel horizon dans mon travail. Un horizon que je vous invite à découvrir.'
+                'Chaque création porte la même intention : transformer un lieu en expérience, et une vision en émotion. Le reste se découvre dans les projets.'
                 :
-                'This creation opened a new horizon in my work. A horizon I invite you to discover.'
+                'Each creation carries the same intention: transforming a place into an experience, and a vision into emotion. The rest is discovered in the projects.'
               }
             </motion.p>
 

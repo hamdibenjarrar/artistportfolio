@@ -16,8 +16,8 @@ export default function HeroModern() {
           priority
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/90"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/20 to-black/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20"></div>
       </div>
 
       {/* Geometric Elements */}
