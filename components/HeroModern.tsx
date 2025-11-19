@@ -23,18 +23,6 @@ export default function HeroModern() {
       {/* Geometric Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, rotate: -45 }}
-          animate={{ opacity: 1, rotate: 0 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          className="absolute top-20 left-10 w-32 h-32 border-4 border-[#C9A86A] transform rotate-45"
-        ></motion.div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 1.5 }}
-          className="absolute bottom-15 md:bottom-20 right-10 md:right-16 w-20 h-20 md:w-24 md:h-24 bg-linear-to-br from-[#C9A86A] to-[#E6D8B4] transform rotate-12"
-        ></motion.div>
-        <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1, duration: 1.2 }}

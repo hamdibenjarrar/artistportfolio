@@ -28,14 +28,16 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="relative text-white overflow-visible">
-      {/* Background Image for Entire Footer */}
-      <div className="absolute inset-0">
-        <div className="relative w-full h-full">
-          <Image src="/work/book.jpeg" alt="" fill className="object-cover object-center" />
-        </div>
-        <div className="absolute inset-0 bg-linear-to-b from-black/85 via-black/75 to-black/90"></div>
-      </div>
+    <footer 
+      ref={footerRef} 
+      className="relative text-white w-full bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/work/foot.jpg')",
+        backgroundAttachment: 'scroll'
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 w-full h-full bg-linear-to-b from-black/85 via-black/75 to-black/90 z-0"></div>
       
       {/* About Section - New Story */}
       <motion.section 
@@ -43,7 +45,7 @@ export default function Footer() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="relative pt-12 md:pt-20 pb-8 md:pb-12"
+        className="relative z-10 pt-12 md:pt-20 pb-8 md:pb-12"
       >
         <div className="mx-auto max-w-4xl px-6 md:px-8">
           <motion.h2 
@@ -120,9 +122,17 @@ export default function Footer() {
               style={{ fontFamily: "var(--font-display)" }}
             >
               {lang==='fr'?
-                'Chaque création porte la même intention : transformer un lieu en expérience, et une vision en émotion. Le reste se découvre dans les projets.'
+                <>
+                  Chaque création porte la même intention : transformer un lieu en expérience, et une vision en émotion.
+                  <br />
+                  Le reste se découvre dans les projets.
+                </>
                 :
-                'Each creation carries the same intention: transforming a place into an experience, and a vision into emotion. The rest is discovered in the projects.'
+                <>
+                  Each creation carries the same intention: transforming a place into an experience, and a vision into emotion.
+                  <br />
+                  The rest is discovered in the projects.
+                </>
               }
             </motion.p>
 
@@ -158,7 +168,7 @@ export default function Footer() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
         viewport={{ once: true }}
-        className="relative py-12 md:py-16 text-center border-t border-[#C9A86A]/20"
+        className="relative z-10 py-12 md:py-16 text-center border-t border-[#C9A86A]/20"
       >
         <motion.h2 
           initial={{ opacity: 0, scale: 0.9 }}
@@ -241,7 +251,7 @@ export default function Footer() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="relative py-6 md:py-8 text-center text-xs md:text-sm font-semibold text-[#C9A86A]/70 border-t border-[#C9A86A]/20"
+        className="relative z-10 py-6 md:py-8 text-center text-xs md:text-sm font-semibold text-[#C9A86A]/70 border-t border-[#C9A86A]/20"
         style={{ fontFamily: "var(--font-heading)" }}
       >
         © {new Date().getFullYear()} Yassine Radhouani. {lang==='fr'?'Tous droits réservés':'All rights reserved'}.

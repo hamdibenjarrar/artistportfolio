@@ -273,7 +273,7 @@ export function FeaturedWorks() {
             <div className="relative">
               <div 
                 ref={imageRef}
-                className="relative aspect-3/4 cursor-pointer group"
+                className="relative aspect-square cursor-pointer group"
                 onClick={openDetailView}
               >
                 <div className="absolute inset-0 bg-linear-to-br from-[#C9A86A]/20 via-transparent to-[#E6D8B4]/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-700" />
@@ -461,37 +461,37 @@ export function FeaturedWorks() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-6"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-3 md:p-4"
             onClick={() => setDetailView(false)}
           >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="relative w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] bg-black/80 backdrop-blur-md rounded-2xl border border-[#C9A86A]/30 shadow-2xl overflow-hidden"
+              initial={{ scale: 0.85, opacity: 0, rotateX: -10 }}
+              animate={{ scale: 1, opacity: 1, rotateX: 0 }}
+              exit={{ scale: 0.9, opacity: 0, rotateX: -5 }}
+              transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+              className="relative w-full max-w-3xl max-h-[85vh] md:max-h-[80vh] bg-black/80 backdrop-blur-md rounded-2xl border border-[#C9A86A]/30 shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <motion.button
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setDetailView(false)}
-                className="absolute top-3 right-3 z-20 text-white/70 hover:text-white text-2xl bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center transition-all duration-200"
+                className="absolute top-3 right-3 z-20 text-white/70 hover:text-white text-xl bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full w-9 h-9 flex items-center justify-center transition-all duration-200"
                 aria-label="Close"
               >
                 ×
               </motion.button>
 
-              <div className="flex flex-col h-full max-h-[90vh] md:max-h-[85vh] overflow-y-auto">
-                {/* Image Section */}
+              <div className="flex flex-col h-full max-h-[85vh] md:max-h-[80vh] overflow-y-auto">
+                {/* Image Section - Compact */}
                 <div className="relative bg-black p-4 md:p-6">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={detailImageIndex}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.3 }}
                       className="relative w-full aspect-square md:aspect-4/3"
                     >
@@ -499,7 +499,7 @@ export function FeaturedWorks() {
                         src={currentWork.detailImages[detailImageIndex] || currentWork.mainImage}
                         alt={`${lang === 'fr' ? 'Détail' : 'Detail'} ${detailImageIndex + 1}`}
                         fill
-                        sizes="(max-width: 768px) 100vw, 800px"
+                        sizes="(max-width: 768px) 100vw, 700px"
                         className="object-contain"
                       />
                     </motion.div>
@@ -508,29 +508,33 @@ export function FeaturedWorks() {
                   {/* Navigation Arrows */}
                   {currentWork.detailImages.length > 1 && (
                     <>
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.15, x: -4 }}
+                        whileTap={{ scale: 0.9 }}
                         onClick={handleDetailPrev}
-                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-[#C9A86A]/90 backdrop-blur-sm text-white p-2 md:p-3 rounded-full transition-all duration-200"
+                        className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-[#C9A86A]/90 backdrop-blur-sm text-white p-2.5 rounded-full transition-all duration-200"
                         aria-label="Previous detail"
                       >
-                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                         </svg>
-                      </button>
+                      </motion.button>
 
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.15, x: 4 }}
+                        whileTap={{ scale: 0.9 }}
                         onClick={handleDetailNext}
-                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-[#C9A86A]/90 backdrop-blur-sm text-white p-2 md:p-3 rounded-full transition-all duration-200"
+                        className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-[#C9A86A]/90 backdrop-blur-sm text-white p-2.5 rounded-full transition-all duration-200"
                         aria-label="Next detail"
                       >
-                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                         </svg>
-                      </button>
+                      </motion.button>
 
                       {/* Image Counter */}
-                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md px-4 py-2 rounded-full">
-                        <span className="text-white text-xs md:text-sm font-medium">
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full">
+                        <span className="text-white text-xs font-medium">
                           {detailImageIndex + 1} / {currentWork.detailImages.length}
                         </span>
                       </div>
@@ -538,62 +542,72 @@ export function FeaturedWorks() {
                   )}
                 </div>
 
-                {/* Info Section - Compact */}
-                <div className="p-5 md:p-6 bg-linear-to-b from-[#0a0a0a] to-black space-y-4">
+                {/* Info Section - More Compact */}
+                <div className="p-4 md:p-5 bg-linear-to-b from-[#0a0a0a] to-black space-y-3">
                   {/* Title and Collection */}
                   <div>
                     <h2 
-                      className="text-2xl md:text-3xl font-bold leading-tight text-[#C9A86A] mb-2"
+                      className="text-xl md:text-2xl font-bold leading-tight text-[#C9A86A] mb-1"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {lang === 'fr' ? currentWork.titleFr : currentWork.titleEn}
                     </h2>
 
                     {currentWork.collection && (
-                      <p className="text-xs text-[#C9A86A]/70 italic mb-3">
-                        {lang === 'fr' ? 'Collection: ' : 'Collection: '}{currentWork.collection}
+                      <p className="text-[10px] md:text-xs text-[#C9A86A]/70 italic mb-2">
+                        {currentWork.collection}
                       </p>
                     )}
 
-                    {/* Metadata Badges */}
-                    <div className="flex flex-wrap gap-2 text-xs">
-                      <span className="px-3 py-1.5 bg-white/5 text-white/70 rounded-full border border-white/10">
+                    {/* Metadata Badges - Compact */}
+                    <div className="flex flex-wrap gap-1.5 text-[10px] md:text-xs">
+                      <span className="px-2.5 py-1 bg-white/5 text-white/70 rounded-full border border-white/10">
                         {currentWork.dimensions}
                       </span>
                       {currentWork.medium && (
-                        <span className="px-3 py-1.5 bg-white/5 text-white/70 rounded-full border border-white/10">
+                        <span className="px-2.5 py-1 bg-white/5 text-white/70 rounded-full border border-white/10">
                           {currentWork.medium}
                         </span>
                       )}
-                      <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">
-                        <span className="inline-block size-2 rounded-full bg-emerald-500" />
+                      <motion.div
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20"
+                      >
+                        <motion.span
+                          animate={{ scale: [1, 1.3, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className="inline-block size-1.5 rounded-full bg-emerald-500"
+                        />
                         <span>{lang === 'fr' ? 'Disponible' : 'Available'}</span>
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
 
-                  {/* Description */}
+                  <div className="h-px bg-linear-to-r from-transparent via-[#C9A86A]/30 to-transparent" />
+
+                  {/* Description - Compact */}
                   <p 
-                    className="text-sm md:text-base leading-relaxed text-white/70"
+                    className="text-xs md:text-sm leading-relaxed text-white/70"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
                     {lang === 'fr' ? currentWork.descFr : currentWork.descEn}
                   </p>
 
-                  {/* Contact Button */}
+                  {/* Contact Button - Compact */}
                   <motion.a
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: 1.03, y: -2 }}
+                    whileTap={{ scale: 0.97 }}
                     href={`https://wa.me/21629123456?text=${encodeURIComponent(
                       (lang === 'fr' ? 'Intéressé par l\'œuvre: ' : 'Interested in artwork: ') +
                       (lang === 'fr' ? currentWork.titleFr : currentWork.titleEn)
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full px-6 py-3 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4] text-black text-center font-bold rounded-full transition-all duration-200 text-sm md:text-base"
+                    className="block w-full px-5 py-2.5 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4] text-black text-center font-bold rounded-full transition-all duration-200 text-xs md:text-sm"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
-                    {lang === 'fr' ? 'Me contacter pour cette œuvre' : 'Contact About This Work'}
+                    {lang === 'fr' ? 'Me contacter' : 'Contact Me'}
                   </motion.a>
                 </div>
               </div>

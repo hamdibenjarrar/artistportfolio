@@ -132,28 +132,30 @@ const collections: Collection[] = [
 
 // 4 Standalone portraits (remaining)
 const standalonePortraits: Portrait[] = [
-  { src: "/work/p9/1.jpg" },
-  { src: "/work/p9/2.jpg" },
-  { src: "/work/p9/3.jpg" },
-  { src: "/work/p9/4.jpg" }
+  { src: "/work/p9/IMG_8577_result.jpg" },
+  { src: "/work/p9/IMG_8602_result.jpg" },
+  { src: "/work/p9/IMG_8603_result.jpg" },
+  { src: "/work/p9/IMG_8604_result.jpg" }
 ];
 
 export function P9Carousel() {
   const { lang } = useLanguage();
   const [activeCollection, setActiveCollection] = useState<Collection | null>(null);
   const [currentPortraitIndex, setCurrentPortraitIndex] = useState(0);
+  const [standaloneView, setStandaloneView] = useState<Portrait | null>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  // GSAP animation when portrait changes
+  // Enhanced GSAP animation when portrait changes
   useEffect(() => {
     if (!imageRef.current || !activeCollection) return;
 
     const tl = gsap.timeline();
     tl.fromTo(
       imageRef.current,
-      { opacity: 0, scale: 0.95, rotateY: 10 },
-      { opacity: 1, scale: 1, rotateY: 0, duration: 0.5, ease: "power2.out" }
+      { opacity: 0, scale: 0.92, rotateY: 15, x: -30 },
+      { opacity: 1, scale: 1, rotateY: 0, x: 0, duration: 0.6, ease: "power3.out" }
     );
 
     return () => {
@@ -161,7 +163,7 @@ export function P9Carousel() {
     };
   }, [currentPortraitIndex, activeCollection]);
 
-  // GSAP stagger fade-in for cards on mount
+  // GSAP stagger fade-in for cards on mount with parallax
   useEffect(() => {
     if (cardRefs.current.length === 0) return;
 
@@ -170,17 +172,35 @@ export function P9Carousel() {
       
       gsap.fromTo(
         card,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 50, scale: 0.9, rotateX: -10 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          delay: index * 0.08,
-          ease: "power2.out"
+          scale: 1,
+          rotateX: 0,
+          duration: 0.8,
+          delay: index * 0.06,
+          ease: "power3.out"
         }
       );
     });
   }, []);
+
+  // Enhanced modal entrance animation
+  useEffect(() => {
+    if (!modalRef.current || !activeCollection) return;
+
+    const tl = gsap.timeline();
+    tl.fromTo(
+      modalRef.current,
+      { scale: 0.85, opacity: 0, rotateX: -15 },
+      { scale: 1, opacity: 1, rotateX: 0, duration: 0.5, ease: "back.out(1.4)" }
+    );
+
+    return () => {
+      tl.kill();
+    };
+  }, [activeCollection]);
 
   const openCollection = (collection: Collection) => {
     setActiveCollection(collection);
@@ -242,48 +262,80 @@ export function P9Carousel() {
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="group cursor-pointer"
+              whileHover={{ 
+                y: -12, 
+                scale: 1.03,
+                rotateY: 5,
+                rotateX: 5,
+                transition: { duration: 0.4, ease: "easeOut" }
+              }}
+              whileTap={{ scale: 0.97 }}
+              className="group cursor-pointer perspective-1000"
               onClick={() => openCollection(collection)}
             >
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-[#E6D8B4] bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300">
+              <div className="relative aspect-3/4 rounded-2xl overflow-hidden border-2 border-[#E6D8B4] bg-white shadow-lg hover:shadow-2xl hover:border-[#C9A86A] transition-all duration-500">
                 <NextImage
                   src={collection.mainCover}
                   alt={lang === 'fr' ? collection.titleFr : collection.titleEn}
                   fill
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
                 
-                {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <div className="text-white">
-                    <div className="text-xs opacity-70 mb-1">
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4 md:p-5">
+                  <div className="text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      whileHover={{ opacity: 1, y: 0 }}
+                      className="text-xs opacity-80 mb-2 flex items-center gap-2"
+                    >
+                      <span className="inline-block w-8 h-px bg-[#C9A86A]" />
                       {collection.portraits.length} {lang === 'fr' ? 'œuvres' : 'works'}
-                    </div>
-                    <div className="text-sm font-semibold">
-                      {lang === 'fr' ? 'Voir la collection' : 'View collection'}
+                    </motion.div>
+                    <div className="text-sm font-bold">
+                      {lang === 'fr' ? 'Découvrir la collection' : 'Explore collection'}
                     </div>
                   </div>
                 </div>
 
-                {/* Count Badge */}
-                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[#111] px-3 py-1 rounded-full text-xs font-bold">
+                {/* Animated Count Badge */}
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-[#111] px-3 py-1.5 rounded-full text-xs font-bold shadow-lg"
+                >
                   {collection.portraits.length}
+                </motion.div>
+
+                {/* Availability Indicator */}
+                <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-emerald-500/90 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-[10px] font-medium">
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="inline-block size-1.5 rounded-full bg-white"
+                  />
+                  {lang === 'fr' ? 'Disponible' : 'Available'}
                 </div>
               </div>
 
               {/* Collection Info */}
-              <div className="mt-3 px-1">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="mt-4 px-1"
+              >
                 <h3
-                  className="text-base md:text-lg font-bold text-[#111] leading-tight mb-1"
+                  className="text-base md:text-lg font-bold text-[#111] leading-tight mb-1.5 group-hover:text-[#C9A86A] transition-colors duration-300"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {lang === 'fr' ? collection.titleFr : collection.titleEn}
                 </h3>
-                <p className="text-xs text-[#666]">{collection.size}</p>
-              </div>
+                <p className="text-xs text-[#666] flex items-center gap-2">
+                  <span className="inline-block w-3 h-px bg-[#E6D8B4]" />
+                  {collection.size}
+                </p>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -307,24 +359,43 @@ export function P9Carousel() {
             {standalonePortraits.map((portrait, index) => (
               <motion.div
                 key={portrait.src}
-                whileHover={{ y: -5, scale: 1.03 }}
-                transition={{ duration: 0.3 }}
-                className="relative aspect-square rounded-xl overflow-hidden border border-[#E6D8B4] bg-white shadow hover:shadow-xl transition-shadow duration-300"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ 
+                  y: -8, 
+                  scale: 1.05,
+                  rotateZ: index % 2 === 0 ? 2 : -2,
+                  transition: { duration: 0.3 }
+                }}
+                onClick={() => setStandaloneView(portrait)}
+                className="relative aspect-square rounded-xl overflow-hidden border-2 border-[#E6D8B4] bg-white shadow hover:shadow-2xl hover:border-[#C9A86A] transition-all duration-500 group cursor-pointer"
               >
                 <NextImage
                   src={portrait.src}
                   alt={`Standalone ${index + 1}`}
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
+                
+                {/* Availability badge */}
+                <div className="absolute top-2 right-2 flex items-center gap-1 bg-emerald-500/90 backdrop-blur-sm text-white px-2 py-1 rounded-full text-[9px] font-medium">
+                  <motion.span
+                    animate={{ scale: [1, 1.3, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
+                    className="inline-block size-1.5 rounded-full bg-white"
+                  />
+                  {lang === 'fr' ? 'Dispo' : 'Available'}
+                </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </div>
 
-      {/* Collection Modal/Lightbox */}
+      {/* Collection Modal/Lightbox - Compact & Enhanced */}
       <AnimatePresence>
         {activeCollection && currentPortrait && (
           <motion.div
@@ -332,35 +403,38 @@ export function P9Carousel() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-3 md:p-4"
             onClick={closeCollection}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              ref={modalRef}
+              initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
+              transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+              className="relative w-full max-w-4xl max-h-[85vh] md:max-h-[80vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1, rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={closeCollection}
-                className="absolute top-4 right-4 z-20 bg-white/90 hover:bg-white backdrop-blur-sm text-[#111] rounded-full w-10 h-10 flex items-center justify-center transition-colors duration-200 shadow-lg"
+                className="absolute top-3 right-3 z-20 bg-white/95 hover:bg-white backdrop-blur-sm text-[#111] rounded-full w-9 h-9 flex items-center justify-center transition-colors duration-200 shadow-lg"
                 aria-label="Close"
               >
-                <span className="text-2xl leading-none">×</span>
-              </button>
+                <span className="text-xl leading-none">×</span>
+              </motion.button>
 
-              <div className="grid md:grid-cols-2 h-full max-h-[90vh]">
-                {/* Left: Image Display */}
-                <div className="relative bg-gradient-to-br from-[#f5f5f5] to-white p-8 md:p-12 flex items-center justify-center">
-                  <div ref={imageRef} className="relative w-full h-full max-h-[60vh] md:max-h-full">
+              <div className="flex flex-col md:flex-row h-full max-h-[85vh] md:max-h-[80vh]">
+                {/* Left: Image Display - 60% */}
+                <div className="relative bg-linear-to-br from-[#fafafa] to-white p-4 md:p-8 flex items-center justify-center md:w-3/5 min-h-[40vh] md:min-h-0">
+                  <div ref={imageRef} className="relative w-full h-full max-h-[45vh] md:max-h-full">
                     <NextImage
                       src={currentPortrait.src}
                       alt={`${lang === 'fr' ? activeCollection.titleFr : activeCollection.titleEn} - ${currentPortraitIndex + 1}`}
                       fill
-                      sizes="50vw"
+                      sizes="(max-width: 768px) 90vw, 50vw"
                       className="object-contain"
                     />
                   </div>
@@ -368,76 +442,93 @@ export function P9Carousel() {
                   {/* Navigation Arrows */}
                   {activeCollection.portraits.length > 1 && (
                     <>
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.15, x: -4 }}
+                        whileTap={{ scale: 0.9 }}
                         onClick={prevPortrait}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm text-[#111] p-3 rounded-full transition-all duration-200 shadow-lg hover:scale-110"
+                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white backdrop-blur-sm text-[#111] p-2.5 md:p-3 rounded-full transition-all duration-200 shadow-lg"
                         aria-label="Previous"
                       >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                         </svg>
-                      </button>
+                      </motion.button>
 
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.15, x: 4 }}
+                        whileTap={{ scale: 0.9 }}
                         onClick={nextPortrait}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm text-[#111] p-3 rounded-full transition-all duration-200 shadow-lg hover:scale-110"
+                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white backdrop-blur-sm text-[#111] p-2.5 md:p-3 rounded-full transition-all duration-200 shadow-lg"
                         aria-label="Next"
                       >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                         </svg>
-                      </button>
+                      </motion.button>
 
                       {/* Image Counter */}
-                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-[#111]">
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs md:text-sm font-medium text-[#111] shadow-lg">
                         {currentPortraitIndex + 1} / {activeCollection.portraits.length}
                       </div>
                     </>
                   )}
                 </div>
 
-                {/* Right: Collection Info */}
-                <div className="p-8 md:p-10 overflow-y-auto bg-white">
-                  <div className="space-y-6">
+                {/* Right: Collection Info - 40% Compact */}
+                <div className="p-5 md:p-6 overflow-y-auto bg-white md:w-2/5 max-h-[45vh] md:max-h-full">
+                  <div className="space-y-4">
+                    {/* Title */}
                     <div>
                       <h2
-                        className="text-3xl md:text-4xl font-black leading-tight text-[#111] mb-2"
+                        className="text-2xl md:text-3xl font-black leading-tight text-[#111] mb-1"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
                         {lang === 'fr' ? activeCollection.titleFr : activeCollection.titleEn}
                       </h2>
-                      <p className="text-sm text-[#666] uppercase tracking-wide">
+                      <p className="text-xs text-[#666] uppercase tracking-wider">
                         {lang === 'fr' ? 'Collection' : 'Collection'}
                       </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-3">
-                      <span className="px-4 py-2 bg-[#f5f5f5] text-[#111] text-sm rounded-full border border-[#E6D8B4]">
+                    {/* Metadata Badges - Compact */}
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1.5 bg-[#f5f5f5] text-[#111] text-xs rounded-full border border-[#E6D8B4]">
                         {activeCollection.size}
                       </span>
-                      <span className="px-4 py-2 bg-[#f5f5f5] text-[#111] text-sm rounded-full border border-[#E6D8B4]">
+                      <span className="px-3 py-1.5 bg-[#f5f5f5] text-[#111] text-xs rounded-full border border-[#E6D8B4]">
                         {activeCollection.medium}
                       </span>
-                      <span className="px-4 py-2 bg-emerald-50 text-emerald-700 text-sm rounded-full border border-emerald-200 flex items-center gap-2">
-                        <span className="inline-block size-2 rounded-full bg-emerald-500" />
+                      <motion.span
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="px-3 py-1.5 bg-emerald-50 text-emerald-700 text-xs rounded-full border border-emerald-200 flex items-center gap-1.5"
+                      >
+                        <motion.span
+                          animate={{ scale: [1, 1.3, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className="inline-block size-1.5 rounded-full bg-emerald-500"
+                        />
                         {lang === 'fr' ? 'Disponible' : 'Available'}
-                      </span>
+                      </motion.span>
                     </div>
 
-                    <div className="h-px bg-gradient-to-r from-transparent via-[#E6D8B4] to-transparent" />
+                    <div className="h-px bg-linear-to-r from-transparent via-[#E6D8B4] to-transparent" />
 
+                    {/* Thumbnail Grid - Compact */}
                     <div>
-                      <h4 className="text-sm font-bold text-[#666] uppercase tracking-wider mb-4">
-                        {lang === 'fr' ? 'Œuvres dans cette collection' : 'Works in this collection'}
+                      <h4 className="text-[10px] font-bold text-[#666] uppercase tracking-wider mb-3">
+                        {activeCollection.portraits.length} {lang === 'fr' ? 'œuvres' : 'works'}
                       </h4>
-                      <div className="grid grid-cols-4 gap-2">
+                      <div className="grid grid-cols-4 gap-1.5">
                         {activeCollection.portraits.map((portrait, index) => (
-                          <button
+                          <motion.button
                             key={portrait.src}
+                            whileHover={{ scale: 1.08 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => setCurrentPortraitIndex(index)}
-                            className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                            className={`relative aspect-square rounded-md overflow-hidden border-2 transition-all duration-200 ${
                               currentPortraitIndex === index
-                                ? 'border-[#C9A86A] shadow-lg scale-105'
+                                ? 'border-[#C9A86A] shadow-lg ring-2 ring-[#C9A86A]/30'
                                 : 'border-[#E6D8B4] hover:border-[#C9A86A]/50'
                             }`}
                           >
@@ -445,27 +536,113 @@ export function P9Carousel() {
                               src={portrait.src}
                               alt={`Preview ${index + 1}`}
                               fill
-                              sizes="80px"
+                              sizes="60px"
                               className="object-cover"
                             />
-                          </button>
+                          </motion.button>
                         ))}
                       </div>
                     </div>
 
+                    {/* Contact Button - Compact */}
                     <motion.a
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
                       href={`https://wa.me/21629123456?text=${encodeURIComponent(
                         (lang === 'fr' ? 'Intéressé par la collection: ' : 'Interested in collection: ') +
                         (lang === 'fr' ? activeCollection.titleFr : activeCollection.titleEn)
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full px-6 py-4 bg-gradient-to-r from-[#C9A86A] to-[#E6D8B4] text-white text-center font-bold rounded-full transition-all duration-200 hover:shadow-xl"
+                      className="block w-full px-5 py-3 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4] text-white text-center font-bold rounded-full transition-all duration-200 hover:shadow-xl text-sm"
                       style={{ fontFamily: "var(--font-heading)" }}
                     >
-                      {lang === 'fr' ? 'Contacter pour cette collection' : 'Contact About This Collection'}
+                      {lang === 'fr' ? 'Me contacter' : 'Contact Me'}
+                    </motion.a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Standalone Portrait Modal */}
+      <AnimatePresence>
+        {standaloneView && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-3 md:p-4"
+            onClick={() => setStandaloneView(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0, rotateX: -10 }}
+              animate={{ scale: 1, opacity: 1, rotateX: 0 }}
+              exit={{ scale: 0.9, opacity: 0, rotateX: -5 }}
+              transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+              className="relative w-full max-w-2xl max-h-[85vh] md:max-h-[80vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <motion.button
+                whileHover={{ scale: 1.1, rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setStandaloneView(null)}
+                className="absolute top-3 right-3 z-20 bg-white/95 hover:bg-white backdrop-blur-sm text-[#111] rounded-full w-9 h-9 flex items-center justify-center transition-colors duration-200 shadow-lg"
+                aria-label="Close"
+              >
+                <span className="text-xl leading-none">×</span>
+              </motion.button>
+
+              <div className="flex flex-col h-full max-h-[85vh] md:max-h-[80vh]">
+                {/* Image Section */}
+                <div className="relative bg-linear-to-br from-[#fafafa] to-white p-6 md:p-8 flex items-center justify-center">
+                  <div className="relative w-full max-w-md aspect-square">
+                    <NextImage
+                      src={standaloneView.src}
+                      alt="Standalone artwork"
+                      fill
+                      sizes="(max-width: 768px) 90vw, 600px"
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+
+                {/* Info Section */}
+                <div className="p-5 md:p-6 bg-white">
+                  <div className="space-y-3">
+                    <div className="flex flex-wrap gap-2 text-xs">
+                      <motion.span
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200 flex items-center gap-1.5"
+                      >
+                        <motion.span
+                          animate={{ scale: [1, 1.3, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className="inline-block size-1.5 rounded-full bg-emerald-500"
+                        />
+                        {lang === 'fr' ? 'Disponible' : 'Available'}
+                      </motion.span>
+                    </div>
+
+                    <div className="h-px bg-linear-to-r from-transparent via-[#E6D8B4] to-transparent" />
+
+                    <motion.a
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      href={`https://wa.me/21629123456?text=${encodeURIComponent(
+                        (lang === 'fr' ? 'Intéressé par cette œuvre individuelle' : 'Interested in this individual work')
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full px-5 py-3 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4] text-white text-center font-bold rounded-full transition-all duration-200 hover:shadow-xl text-sm"
+                      style={{ fontFamily: "var(--font-heading)" }}
+                    >
+                      {lang === 'fr' ? 'Me contacter' : 'Contact Me'}
                     </motion.a>
                   </div>
                 </div>
