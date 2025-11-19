@@ -53,7 +53,7 @@ export default function HomePage() {
   const p9Images = getP9Images();
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#0a0a0a] text-white">
       <HeroModern />
       <P9Carousel images={p9Images} />
       <FeaturedWorks />

@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Syne, Manrope } from "next/font/google";
+import { Playfair_Display, Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/i18n/LanguageProvider";
 import Footer from "@/components/Footer";
 
-const syne = Syne({
+const playfair = Playfair_Display({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const manrope = Manrope({
+const oswald = Oswald({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const inter = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
@@ -36,10 +44,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/logo.png" type="image/png" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       </head>
-      <body className={`${syne.variable} ${manrope.variable} antialiased bg-[#111] text-white font-body` }>
+      <body className={`${playfair.variable} ${oswald.variable} ${inter.variable} antialiased bg-[#0a0a0a] text-white font-body` }>
         <LanguageProvider>
           <main>{children}</main>
           <Footer />

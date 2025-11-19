@@ -13,6 +13,7 @@
   --color-bronze: var(--bronze);
   --color-white: var(--white);
   --font-display: var(--font-display);
+  --font-heading: var(--font-heading);
   --font-body: var(--font-body);
 }
 
@@ -20,7 +21,10 @@ html, body { background: var(--charcoal); color: var(--white); }
 html, body { overscroll-behavior-y: none; }
 
 body { font-family: var(--font-body), system-ui, sans-serif; }
-h1,h2,h3,h4,h5,h6 { font-family: var(--font-display), system-ui, sans-serif; font-weight: 600; }
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-display), system-ui, serif; font-weight: 700; }
+.font-heading { font-family: var(--font-heading), system-ui, sans-serif; }
+.font-display { font-family: var(--font-display), system-ui, serif; }
+.font-body { font-family: var(--font-body), system-ui, sans-serif; }
 
 /* Bronze divider utility */
 .divider-line { position: relative; padding-bottom: .75rem; }

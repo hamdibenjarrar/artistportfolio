@@ -6,82 +6,169 @@ import { useLanguage } from "@/components/i18n/LanguageProvider";
 export default function HeroModern() {
   const { lang, setLang } = useLanguage();
   return (
-    <section className="relative pt-12 pb-16 bg-white text-[#111] overflow-hidden" aria-label="Hero">
-      <div className="pointer-events-none absolute inset-0 opacity-[0.15] select-none" aria-hidden="true">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="gridStroke" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stopColor="#C9A86A" />
-              <stop offset="100%" stopColor="#E6D8B4" />
-            </linearGradient>
-          </defs>
-          {Array.from({ length: 24 }).map((_, i) => (
-            <line key={`h-${i}`} x1="0" x2="100%" y1={i*32} y2={i*32} stroke="url(#gridStroke)" strokeWidth="0.5" />
-          ))}
-          {Array.from({ length: 16 }).map((_, i) => (
-            <line key={`v-${i}`} y1="0" y2="100%" x1={i*64} x2={i*64} stroke="url(#gridStroke)" strokeWidth="0.5" />
-          ))}
-        </svg>
+    <section className="relative min-h-screen bg-black text-white overflow-hidden" aria-label="Hero">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/work/yas2.jpg"
+          alt="Background"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/50"></div>
       </div>
-      <div className="mx-auto max-w-4xl px-6 flex flex-col items-center text-center relative">
+
+      {/* Geometric Elements */}
+      <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, rotate: -45 }}
+          animate={{ opacity: 1, rotate: 0 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          className="absolute top-20 left-10 w-32 h-32 border-4 border-[#C9A86A] transform rotate-45"
+        ></motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          className="relative w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden shadow-lg mb-10 before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(circle_at_30%_30%,#E6D8B4_0%,#fff_55%,transparent_70%)] before:opacity-70"
-        >
-          <Image
-            src="/work/yas1.jpg"
-            alt="Portrait of Yassine Radhouani"
-            fill
-            priority
-            sizes="(min-width:768px) 16rem, 14rem"
-            className="object-cover"
-          />
-        </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-          className="text-3xl md:text-4xl font-semibold tracking-tight"
-        >
-          Yassine Radhouani
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.8, ease: "easeOut" }}
-          className="mt-3 text-lg font-medium text-[#333]"
-        >
-          {lang === 'fr' ? 'Architecte & Peintre' : 'Architect & Art Painter'}
-        </motion.p>
+          transition={{ delay: 0.5, duration: 1.5 }}
+          className="absolute bottom-15 md:bottom-20 right-10 md:right-16 w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-[#C9A86A] to-[#E6D8B4] transform rotate-12"
+        ></motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1, duration: 1.2 }}
+          className="absolute top-[60%] right-8 w-2 h-48 bg-gradient-to-b from-[#C9A86A] to-transparent"
+        ></motion.div>
+      </div>
+
+      {/* Language Toggle - Top Right - Smaller Size */}
+      <div className="absolute top-4 right-4 md:top-6 md:right-6 z-20">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45, duration: 0.8, ease: "easeOut" }}
-          className="mt-5 flex items-center gap-3"
+          transition={{ duration: 0.8, delay: 0.5 }}
         >
           <button
             aria-label="Language toggle"
             onClick={() => setLang(lang === 'en' ? 'fr' : 'en')}
-            className="group relative inline-flex items-center rounded-full border border-[#E6D8B4] bg-white/70 backdrop-blur px-3 py-1 text-[11px] font-medium text-[#111] shadow-sm hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-[#C9A86A]"
+            className="group relative inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-[#C9A86A] to-[#E6D8B4] text-black font-bold text-xs tracking-wide uppercase hover:shadow-xl transition-all duration-300 transform hover:scale-105 rounded-sm"
+            style={{ fontFamily: "var(--font-heading)" }}
           >
             <span className="flex items-center gap-1">
-              <span className={`transition ${lang==='en'?'font-semibold text-[#111]':'text-[#666]'}`}>EN</span>
-              <span className="text-[#aaa]">/</span>
-              <span className={`transition ${lang==='fr'?'font-semibold text-[#111]':'text-[#666]'}`}>FR</span>
+              <span className={`transition ${lang==='en'?'opacity-100':'opacity-60'}`}>EN</span>
+              <span className="text-black/50">|</span>
+              <span className={`transition ${lang==='fr'?'opacity-100':'opacity-60'}`}>FR</span>
             </span>
-            <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_20%_20%,#fff,transparent_70%)] opacity-0 group-hover:opacity-100 transition" />
           </button>
         </motion.div>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-          className="mt-5 max-w-2xl text-sm leading-relaxed text-[#444]"
-        >
-          {lang==='fr' ? 'Architecte et peintre tunisien explorant les intersections entre structure lumineuse et matérialité poétique. Chaque œuvre cherche un équilibre entre espace, texture et silence contemplatif.' : 'Tunisian architect and painter exploring intersections of luminous structure and poetic materiality. Each work seeks equilibrium between space, texture, and contemplative silence.'}
-        </motion.p>
+      </div>
+
+      {/* Content Container - Full height with bottom positioning */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-end">
+        
+        {/* Desktop/Tablet Layout - Far Left Bottom Positioning */}
+        <div className="hidden sm:block sm:absolute sm:left-12 md:left-16 lg:left-20 sm:bottom-16 md:bottom-20 lg:bottom-24">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="text-left w-[400px] md:w-[450px] lg:w-[500px]"
+          >
+            <motion.h1
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
+              className="text-4xl md:text-5xl lg:text-6xl font-black leading-none tracking-tight mb-4 md:mb-5"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#C9A86A] to-white">
+                YASSINE
+              </span>
+              <span className="block text-white" style={{ fontFamily: "var(--font-heading)" }}>
+                RADHOUANI
+              </span>
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="flex items-center gap-3 mb-5 md:mb-6"
+            >
+              <div className="w-12 md:w-16 h-0.5 bg-gradient-to-r from-[#C9A86A] to-[#E6D8B4]"></div>
+              <p className="text-base md:text-lg lg:text-xl font-light tracking-widest uppercase text-[#C9A86A]" style={{ fontFamily: "var(--font-heading)" }}>
+                ARTIST
+              </p>
+              <div className="w-12 md:w-16 h-0.5 bg-gradient-to-r from-[#E6D8B4] to-[#C9A86A]"></div>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="max-w-md text-base md:text-lg font-bold leading-relaxed text-transparent bg-clip-text bg-gradient-to-r from-[#C9A86A] via-white to-[#E6D8B4]" 
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              {lang === 'fr' ? 
+                'Créant des œuvres qui explorent l\'intersection entre géométrie, espace et mouvement humain à travers l\'architecture et l\'art contemporain.' :
+                'Creating works that explore the intersection of geometry, space, and human movement through architecture and contemporary art.'
+              }
+            </motion.p>
+          </motion.div>
+        </div>
+
+        {/* Mobile Layout - Bottom positioning with larger text */}
+        <div className="sm:hidden pb-20 px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="text-left"
+          >
+            <h1 
+              className="text-5xl font-black tracking-tight leading-none mb-6"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#C9A86A] to-white">
+                YASSINE
+              </span>
+              <span className="block text-white" style={{ fontFamily: "var(--font-heading)" }}>
+                RADHOUANI
+              </span>
+            </h1>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, delay: 0.8 }}
+              className="flex items-center gap-4 mb-6"
+            >
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: "3rem" }}
+                transition={{ duration: 1.2, delay: 0.8 }}
+                className="h-1 bg-gradient-to-r from-[#C9A86A] to-[#E6D8B4]"
+              />
+              <h2 
+                className="text-lg font-light tracking-[0.15em] uppercase text-[#C9A86A]" 
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                ARTIST
+              </h2>
+            </motion.div>
+
+            <p 
+              className="text-lg font-bold leading-relaxed max-w-md text-transparent bg-clip-text bg-gradient-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              {lang === 'fr' ? 
+                'Créant des œuvres qui explorent l\'intersection entre géométrie, espace et mouvement humain à travers l\'architecture et l\'art contemporain.' :
+                'Creating works that explore the intersection of geometry, space, and human movement through architecture and contemporary art.'
+              }
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

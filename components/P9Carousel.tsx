@@ -44,10 +44,10 @@ export function P9Carousel({ images }: { images: string[] }) {
   }, []);
 
   return (
-    <section className="mt-10 pb-8" aria-label="Gallery" onKeyDown={handleKey}>
+    <section className="py-20 bg-white" aria-label="Gallery" onKeyDown={handleKey}>
       <div className="mx-auto max-w-[1400px] px-6">
-        <header className="flex items-baseline justify-between mb-5">
-          <h2 className="text-lg md:text-xl font-semibold tracking-tight text-[#111]">{lang==='fr'? 'Collection' : 'Collection'}</h2>
+        <header className="flex items-baseline justify-between mb-12">
+          <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-[#111]" style={{ fontFamily: "var(--font-display)" }}>{lang==='fr'? 'Collection' : 'Collection'}</h2>
           <span className="text-[11px] text-[#666]">{data.length} {lang==='fr'? 'œuvres':'works'}</span>
         </header>
         <div className="relative">
