@@ -1,8 +1,9 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import NextImage from "next/image";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from "gsap";
 
 type Artwork = {
   id: string;
@@ -149,193 +150,455 @@ const artworks: Artwork[] = [
 
 export function FeaturedWorks() {
   const { lang } = useLanguage();
-  const [activeWork, setActiveWork] = useState<Artwork | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [detailView, setDetailView] = useState(false);
+  const [detailImageIndex, setDetailImageIndex] = useState(0);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const metaRef = useRef<HTMLDivElement>(null);
+
+  const currentWork = artworks[currentIndex];
+
+  useEffect(() => {
+    if (!imageRef.current || !titleRef.current || !descRef.current || !metaRef.current) return;
+
+    const tl = gsap.timeline();
+    
+    tl.fromTo(imageRef.current, 
+      { opacity: 0, scale: 0.9, rotateY: -15 },
+      { opacity: 1, scale: 1, rotateY: 0, duration: 1.2, ease: "power3.out" }
+    )
+    .fromTo(titleRef.current,
+      { opacity: 0, x: -50, rotateX: -20 },
+      { opacity: 1, x: 0, rotateX: 0, duration: 0.8, ease: "power2.out" },
+      "-=0.8"
+    )
+    .fromTo(metaRef.current,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+      "-=0.5"
+    )
+    .fromTo(descRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+      "-=0.4"
+    );
+
+    return () => {
+      tl.kill();
+    };
+  }, [currentIndex]);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % artworks.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + artworks.length) % artworks.length);
+  };
+
+  const openDetailView = () => {
+    setDetailImageIndex(0);
+    setDetailView(true);
+  };
+
+  const handleDetailNext = () => {
+    setDetailImageIndex((prev) => (prev + 1) % currentWork.detailImages.length);
+  };
+
+  const handleDetailPrev = () => {
+    setDetailImageIndex((prev) => (prev - 1 + currentWork.detailImages.length) % currentWork.detailImages.length);
+  };
+
+  const isTrilogyArt = currentWork.collection === "L'âme des jours";
+  const trilogyImage = "/3.jpg";
 
   return (
     <>
-      <section className="relative py-16 md:py-24 bg-[#0a0a0a] overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-[#C9A86A] to-transparent"></div>
-        
-        <div className="mx-auto max-w-[1600px] px-4 md:px-6">
+      <section className="relative min-h-screen py-20 md:py-32 bg-linear-to-b from-[#0a0a0a] via-[#1a1a1a] to-[#0a0a0a] overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12 md:mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              {lang === 'fr' ? 'Œuvres' : 'Work'}
-            </h2>
-            <p className="text-sm md:text-base text-white/60 max-w-2xl mx-auto">
-              {lang === 'fr' 
-                ? 'Une collection de pièces explorant la matière, le geste et l\'émotion.'
-                : 'A collection of pieces exploring material, gesture, and emotion.'}
-            </p>
-          </motion.div>
-
-          <div 
-            ref={scrollRef}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
-          >
-            {artworks.map((work, index) => (
-              <motion.div
-                key={work.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group cursor-pointer"
-                onClick={() => setActiveWork(work)}
-              >
-                <div className="relative aspect-2/3 rounded-lg overflow-hidden bg-[#1a1a1a] border border-white/10">
-                  <NextImage
-                    src={work.mainImage}
-                    alt={lang === 'fr' ? work.titleFr : work.titleEn}
-                    fill
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="object-contain p-3 md:p-4 group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
-                      <h3 className="text-white text-xs md:text-sm font-semibold line-clamp-2">
-                        {lang === 'fr' ? work.titleFr : work.titleEn}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-3 text-center">
-                  <h3 className="text-white/90 text-xs md:text-sm font-medium mb-1">
-                    {lang === 'fr' ? work.titleFr : work.titleEn}
-                  </h3>
-                  <p className="text-white/50 text-[10px] md:text-xs">{work.dimensions}</p>
-                  <div className="mt-2">
-                    <span className="inline-flex items-center gap-1 text-[9px] md:text-[10px] font-medium text-emerald-400">
-                      <span className="inline-block size-1.5 rounded-full bg-emerald-500"></span>
-                      {lang === 'fr' ? 'Disponible' : 'Available'}
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.2, 0.1],
+              rotate: [0, 180, 360]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-[#C9A86A]/10 blur-3xl"
+          />
+          <motion.div
+            animate={{ 
+              scale: [1.2, 1, 1.2],
+              opacity: [0.15, 0.25, 0.15],
+              rotate: [360, 180, 0]
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-1/4 left-1/3 w-lg h-128 rounded-full bg-[#E6D8B4]/10 blur-3xl"
+          />
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-[#C9A86A] to-transparent opacity-50"></div>
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="text-center mb-16 md:mb-24 relative z-10"
+        >
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-4 text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-[#E6D8B4]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            {lang === 'fr' ? 'Œuvres' : 'Work'}
+          </h2>
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <motion.div 
+              animate={{ scaleX: [0, 1, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="h-px w-24 bg-linear-to-r from-transparent via-[#C9A86A] to-transparent"
+            />
+            <span className="text-sm tracking-[0.3em] text-white/50 uppercase">
+              {currentIndex + 1} / {artworks.length}
+            </span>
+            <motion.div 
+              animate={{ scaleX: [0, 1, 0] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+              className="h-px w-24 bg-linear-to-r from-transparent via-[#C9A86A] to-transparent"
+            />
+          </div>
+        </motion.div>
+
+        <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+            
+            <div className="relative">
+              <div 
+                ref={imageRef}
+                className="relative aspect-3/4 cursor-pointer group"
+                onClick={openDetailView}
+              >
+                <div className="absolute inset-0 bg-linear-to-br from-[#C9A86A]/20 via-transparent to-[#E6D8B4]/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-700" />
+                
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-[#C9A86A]/30 shadow-2xl shadow-[#C9A86A]/20"
+                >
+                  <NextImage
+                    src={currentWork.mainImage}
+                    alt={lang === 'fr' ? currentWork.titleFr : currentWork.titleEn}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                    priority
+                  />
+                  
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                    <motion.div
+                      initial={{ scale: 0, rotate: -180 }}
+                      whileHover={{ scale: 1, rotate: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="text-white text-6xl"
+                    >
+                      +
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                <motion.button
+                  whileHover={{ scale: 1.1, x: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-[#C9A86A]/80 backdrop-blur-sm text-white p-4 rounded-full transition-all duration-300 border border-white/20"
+                  aria-label="Previous"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.1, x: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-[#C9A86A]/80 backdrop-blur-sm text-white p-4 rounded-full transition-all duration-300 border border-white/20"
+                  aria-label="Next"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </motion.button>
+              </div>
+
+              {isTrilogyArt && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  className="mt-8"
+                >
+                  <p className="text-xs text-[#C9A86A] mb-3 tracking-widest uppercase">
+                    {lang === 'fr' ? 'Vue d\'ensemble de la trilogie' : 'Trilogy Overview'}
+                  </p>
+                  <div className="relative aspect-16/5 rounded-xl overflow-hidden border border-[#C9A86A]/30 cursor-pointer hover:border-[#C9A86A] transition-colors duration-300">
+                    <NextImage
+                      src={trilogyImage}
+                      alt="L'âme des jours trilogy"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+              )}
+            </div>
+
+            <div className="space-y-6 md:space-y-8">
+              <div>
+                <h3 
+                  ref={titleRef}
+                  className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-4 text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {lang === 'fr' ? currentWork.titleFr : currentWork.titleEn}
+                </h3>
+
+                {currentWork.collection && (
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="text-sm italic text-[#C9A86A] mb-3 tracking-wide"
+                  >
+                    {lang === 'fr' ? 'Collection: ' : 'Collection: '}{currentWork.collection}
+                  </motion.p>
+                )}
+
+                <div 
+                  ref={metaRef}
+                  className="flex flex-wrap gap-4 text-sm text-white/60 mb-6"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  <span className="px-4 py-2 bg-white/5 rounded-full border border-white/10">
+                    {currentWork.dimensions}
+                  </span>
+                  {currentWork.medium && (
+                    <span className="px-4 py-2 bg-white/5 rounded-full border border-white/10">
+                      {currentWork.medium}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <motion.div
+                animate={{ height: "auto" }}
+                className="h-px w-full bg-linear-to-r from-transparent via-[#C9A86A] to-transparent"
+              />
+
+              <p 
+                ref={descRef}
+                className="text-base md:text-lg leading-relaxed text-white/80"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {lang === 'fr' ? currentWork.descFr : currentWork.descEn}
+              </p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="flex flex-wrap gap-4 pt-6"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201, 168, 106, 0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={openDetailView}
+                  className="px-8 py-4 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4] text-black font-bold rounded-full transition-all duration-300"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {lang === 'fr' ? 'Voir les détails' : 'View Details'}
+                </motion.button>
+
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={`https://wa.me/21629123456?text=${encodeURIComponent(
+                    (lang === 'fr' ? 'Intéressé par l\'œuvre: ' : 'Interested in artwork: ') +
+                    (lang === 'fr' ? currentWork.titleFr : currentWork.titleEn)
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full border border-white/20 transition-all duration-300"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {lang === 'fr' ? 'Me contacter' : 'Contact Me'}
+                </motion.a>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="flex items-center gap-3 pt-4"
+              >
+                <motion.span 
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="inline-block size-3 rounded-full bg-emerald-500"
+                />
+                <span className="text-sm text-white/60">
+                  {lang === 'fr' ? 'Disponible à l\'achat' : 'Available for Purchase'}
+                </span>
+              </motion.div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Modal */}
       <AnimatePresence>
-        {activeWork && (
+        {detailView && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
-            onClick={() => setActiveWork(null)}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-6"
+            onClick={() => setDetailView(false)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-6xl bg-[#1a1a1a] rounded-xl border-2 border-[#C9A86A]/30 overflow-hidden"
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="relative w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] bg-black/80 backdrop-blur-md rounded-2xl border border-[#C9A86A]/30 shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                onClick={() => setActiveWork(null)}
-                className="absolute top-4 right-4 z-10 text-white/60 hover:text-white text-3xl bg-black/30 hover:bg-black/50 backdrop-blur rounded-full w-10 h-10 flex items-center justify-center transition-colors"
+              {/* Close Button */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setDetailView(false)}
+                className="absolute top-3 right-3 z-20 text-white/70 hover:text-white text-2xl bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center transition-all duration-200"
                 aria-label="Close"
               >
                 ×
-              </button>
+              </motion.button>
 
-              <div className="flex flex-col md:flex-row max-h-[90vh]">
-                {/* Left: Main Image */}
-                <div className="md:w-1/2 bg-white p-6 md:p-8 flex items-center justify-center">
-                  <div className="relative w-full aspect-2/3">
-                    <NextImage
-                      src={activeWork.mainImage}
-                      alt={lang === 'fr' ? activeWork.titleFr : activeWork.titleEn}
-                      fill
-                      sizes="50vw"
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
+              <div className="flex flex-col h-full max-h-[90vh] md:max-h-[85vh] overflow-y-auto">
+                {/* Image Section */}
+                <div className="relative bg-black p-4 md:p-6">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={detailImageIndex}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="relative w-full aspect-square md:aspect-4/3"
+                    >
+                      <NextImage
+                        src={currentWork.detailImages[detailImageIndex] || currentWork.mainImage}
+                        alt={`${lang === 'fr' ? 'Détail' : 'Detail'} ${detailImageIndex + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 800px"
+                        className="object-contain"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
 
-                {/* Right: Content + Detail Images */}
-                <div className="md:w-1/2 p-6 md:p-8 bg-[#1a1a1a] text-white flex flex-col max-h-[90vh] overflow-y-auto">
-                      <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                        {lang === 'fr' ? activeWork.titleFr : activeWork.titleEn}
-                      </h2>
+                  {/* Navigation Arrows */}
+                  {currentWork.detailImages.length > 1 && (
+                    <>
+                      <button
+                        onClick={handleDetailPrev}
+                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-[#C9A86A]/90 backdrop-blur-sm text-white p-2 md:p-3 rounded-full transition-all duration-200"
+                        aria-label="Previous detail"
+                      >
+                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
 
-                      {activeWork.collection && (
-                        <p className="text-xs italic text-[#C9A86A] mb-2">
-                          {lang === 'fr' ? 'Collection: ' : 'Collection: '}{activeWork.collection}
-                        </p>
-                      )}
+                      <button
+                        onClick={handleDetailNext}
+                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-[#C9A86A]/90 backdrop-blur-sm text-white p-2 md:p-3 rounded-full transition-all duration-200"
+                        aria-label="Next detail"
+                      >
+                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
 
-                      <div className="flex flex-wrap gap-3 text-sm text-white/60 mb-4">
-                        <span>{activeWork.dimensions}</span>
-                        {activeWork.medium && (
-                          <>
-                            <span>•</span>
-                            <span>{activeWork.medium}</span>
-                          </>
-                        )}
-                      </div>
-
-                      <p className="text-sm md:text-base leading-relaxed text-white/80 mb-6">
-                        {lang === 'fr' ? activeWork.descFr : activeWork.descEn}
-                      </p>
-
-                      <div className="flex items-center gap-4 mb-6">
-                        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-400">
-                          <span className="inline-block size-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                          {lang === 'fr' ? 'Disponible' : 'Available'}
+                      {/* Image Counter */}
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md px-4 py-2 rounded-full">
+                        <span className="text-white text-xs md:text-sm font-medium">
+                          {detailImageIndex + 1} / {currentWork.detailImages.length}
                         </span>
                       </div>
+                    </>
+                  )}
+                </div>
 
-                      <a
-                        href={`https://wa.me/21629123456?text=${encodeURIComponent(
-                          (lang === 'fr' ? 'Intéressé par l\'œuvre: ' : 'Interested in artwork: ') +
-                          (lang === 'fr' ? activeWork.titleFr : activeWork.titleEn)
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block px-6 py-3 bg-[#C9A86A] text-white text-sm font-semibold rounded-lg hover:bg-[#B8976A] transition-colors duration-300"
-                      >
-                        {lang === 'fr' ? 'Contacter' : 'Contact'}
-                      </a>
+                {/* Info Section - Compact */}
+                <div className="p-5 md:p-6 bg-linear-to-b from-[#0a0a0a] to-black space-y-4">
+                  {/* Title and Collection */}
+                  <div>
+                    <h2 
+                      className="text-2xl md:text-3xl font-bold leading-tight text-[#C9A86A] mb-2"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {lang === 'fr' ? currentWork.titleFr : currentWork.titleEn}
+                    </h2>
 
-                      {/* Detail Images Gallery */}
-                      {activeWork.detailImages.length > 0 && (
-                        <div className="mt-8 pt-6 border-t border-white/10">
-                          <h3 className="text-sm font-semibold text-white/90 mb-3">
-                            {lang === 'fr' ? 'Images détaillées' : 'Detail Images'}
-                          </h3>
-                          <div className="grid grid-cols-3 gap-2">
-                            {activeWork.detailImages.map((detailImg, idx) => (
-                              <div key={idx} className="relative aspect-square rounded-lg overflow-hidden border border-white/20 hover:border-[#C9A86A] transition-colors cursor-pointer group">
-                                <NextImage
-                                  src={detailImg}
-                                  alt={`${lang === 'fr' ? 'Détail' : 'Detail'} ${idx + 1}`}
-                                  fill
-                                  sizes="150px"
-                                  className="object-cover group-hover:scale-110 transition-transform duration-300"
-                                />
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                    {currentWork.collection && (
+                      <p className="text-xs text-[#C9A86A]/70 italic mb-3">
+                        {lang === 'fr' ? 'Collection: ' : 'Collection: '}{currentWork.collection}
+                      </p>
+                    )}
+
+                    {/* Metadata Badges */}
+                    <div className="flex flex-wrap gap-2 text-xs">
+                      <span className="px-3 py-1.5 bg-white/5 text-white/70 rounded-full border border-white/10">
+                        {currentWork.dimensions}
+                      </span>
+                      {currentWork.medium && (
+                        <span className="px-3 py-1.5 bg-white/5 text-white/70 rounded-full border border-white/10">
+                          {currentWork.medium}
+                        </span>
                       )}
+                      <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">
+                        <span className="inline-block size-2 rounded-full bg-emerald-500" />
+                        <span>{lang === 'fr' ? 'Disponible' : 'Available'}</span>
+                      </div>
                     </div>
                   </div>
-                </motion.div>
-              </motion.div>
+
+                  {/* Description */}
+                  <p 
+                    className="text-sm md:text-base leading-relaxed text-white/70"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    {lang === 'fr' ? currentWork.descFr : currentWork.descEn}
+                  </p>
+
+                  {/* Contact Button */}
+                  <motion.a
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    href={`https://wa.me/21629123456?text=${encodeURIComponent(
+                      (lang === 'fr' ? 'Intéressé par l\'œuvre: ' : 'Interested in artwork: ') +
+                      (lang === 'fr' ? currentWork.titleFr : currentWork.titleEn)
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full px-6 py-3 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4] text-black text-center font-bold rounded-full transition-all duration-200 text-sm md:text-base"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {lang === 'fr' ? 'Me contacter pour cette œuvre' : 'Contact About This Work'}
+                  </motion.a>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
