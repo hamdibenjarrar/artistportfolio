@@ -12,14 +12,24 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
+// Initialize language from localStorage or default to 'fr'
+function getInitialLang(): Lang {
+  if (typeof window === "undefined") return "fr";
+  const saved = localStorage.getItem("lang") as Lang | null;
+  return (saved === "en" || saved === "fr") ? saved : "fr";
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("fr");
+  const [lang, setLangState] = useState<Lang>(getInitialLang);
 
   useEffect(() => {
-    const saved = typeof window !== "undefined" ? (localStorage.getItem("lang") as Lang | null) : null;
+    // Sync with localStorage on mount in case it changed
+    const saved = localStorage.getItem("lang") as Lang | null;
     if (saved === "en" || saved === "fr") {
-      // Use setTimeout to avoid synchronous setState in effect
-      setTimeout(() => setLangState(saved), 0);
+      setLangState(saved);
+    } else {
+      // Set default to localStorage if not present
+      localStorage.setItem("lang", "fr");
     }
   }, []);
 
