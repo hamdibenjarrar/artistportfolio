@@ -431,13 +431,13 @@ export function P9Carousel() {
                 <div className="relative bg-linear-to-br from-[#fafafa] to-white p-4 md:p-8 flex items-center justify-center md:w-3/5 min-h-[40vh] md:min-h-0">
                   <div ref={imageRef} className="relative w-full h-full max-h-[45vh] md:max-h-full">
                     <NextImage
+                      key={currentPortrait.src}
                       src={currentPortrait.src}
                       alt={`${lang === 'fr' ? activeCollection.titleFr : activeCollection.titleEn} - ${currentPortraitIndex + 1}`}
                       fill
                       sizes="(max-width: 768px) 90vw, 50vw"
                       className="object-contain"
-                      priority
-                      unoptimized
+                      loading="eager"
                     />
                   </div>
 
