@@ -20,21 +20,125 @@ type Artwork = {
 
 const artworks: Artwork[] = [
   {
-    id: "p2",
-    mainImage: "/work/p2/p2.jpg",
+    id: "p9-1",
+    mainImage: "/work/p9/1.1.jpg",
     detailImages: [
-      "/work/p2/detail/IMG_8402_result.jpg",
-      "/work/p2/detail/IMG_8404_result.jpg",
-      "/work/p2/detail/IMG_8405_result.jpg",
-      "/work/p2/detail/IMG_8406_result.jpg",
-      "/work/p2/detail/IMG_8409_result.jpg"
+      "/work/p9/1.jpg",
+      "/work/p9/2.jpg",
+      "/work/p9/3.jpg",
+      "/work/p9/4.jpg",
+      "/work/p9/5.jpg",
+      "/work/p9/6.jpg",
+      "/work/p9/7.jpg"
     ],
-    titleEn: "Melodic Resonance",
-    titleFr: "Résonance Mélodique",
-    descEn: "An exploration of chromatic vibrations where color sings across the canvas. Inspired by the phrase 'It's with you that I want to sing,' this work captures the harmony between presence and expression, transforming emotion into visual rhythm.",
-    descFr: "Une exploration des vibrations chromatiques où la couleur chante à travers la toile. Inspirée par la phrase 'C'est avec toi que je veux chanter', cette œuvre capture l'harmonie entre présence et expression, transformant l'émotion en rythme visuel.",
-    dimensions: "100 × 130 cm",
-    medium: "Acrylique sur toile"
+    titleEn: "Andalusian Poetry",
+    titleFr: "Poésie Andalouse",
+    descEn: "A collection of seven portraits inspired by Andalusian poetry. Each piece captures the essence of poetic expression through abstract forms and vibrant colors, translating verse into visual rhythm.",
+    descFr: "Une collection de sept portraits inspirés par la poésie andalouse. Chaque pièce capture l'essence de l'expression poétique à travers des formes abstraites et des couleurs vibrantes, traduisant les vers en rythme visuel.",
+    dimensions: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "p9-2",
+    mainImage: "/work/p9/2.2.jpg",
+    detailImages: [
+      "/work/p9/8.jpg",
+      "/work/p9/9.jpg",
+      "/work/p9/10.jpg",
+      "/work/p9/11.jpg",
+      "/work/p9/12.jpg",
+      "/work/p9/13.jpg"
+    ],
+    titleEn: "I Walk to You",
+    titleFr: "Je marche à toi",
+    descEn: "A series exploring movement and connection. Each portrait represents a step in the journey toward presence, where gesture and color map the path of reaching out.",
+    descFr: "Une série explorant le mouvement et la connexion. Chaque portrait représente une étape du voyage vers la présence, où le geste et la couleur tracent le chemin de la rencontre.",
+    dimensions: "50 × 37 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "p9-3",
+    mainImage: "/work/p9/3.3.jpg",
+    detailImages: [
+      "/work/p9/14.jpg",
+      "/work/p9/15.jpg",
+      "/work/p9/16.jpg",
+      "/work/p9/17.jpg"
+    ],
+    titleEn: "Oh the Days",
+    titleFr: "Oh les jours",
+    descEn: "Four portraits contemplating the passage of time. Layers of paint and mark-making create a visual diary where each day leaves its trace in color and form.",
+    descFr: "Quatre portraits contemplant le passage du temps. Des couches de peinture et de marques créent un journal visuel où chaque jour laisse sa trace en couleur et en forme.",
+    dimensions: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "p9-4",
+    mainImage: "/work/p9/4.4.jpg",
+    detailImages: [
+      "/work/p9/18.jpg",
+      "/work/p9/19.jpg",
+      "/work/p9/20.jpg",
+      "/work/p9/21.jpg",
+      "/work/p9/22.jpg",
+      "/work/p9/23.jpg"
+    ],
+    titleEn: "We Talked a Lot",
+    titleFr: "On a beaucoup parlé",
+    descEn: "Six portraits capturing the essence of conversation and exchange. Abstract forms suggest dialogue, where words dissolve into color and gesture becomes language.",
+    descFr: "Six portraits capturant l'essence de la conversation et de l'échange. Des formes abstraites suggèrent le dialogue, où les mots se dissolvent en couleur et le geste devient langage.",
+    dimensions: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "p9-5",
+    mainImage: "/work/p9/5.5.jpg",
+    detailImages: [
+      "/work/p9/24.jpg",
+      "/work/p9/25.jpg",
+      "/work/p9/26.jpg",
+      "/work/p9/27.jpg",
+      "/work/p9/28.jpg",
+      "/work/p9/29.jpg"
+    ],
+    titleEn: "I Write to You",
+    titleFr: "Je t'écris",
+    descEn: "A collection exploring the act of writing and communication. Each piece translates written expression into visual form, where calligraphic gestures meet abstract composition.",
+    descFr: "Une collection explorant l'acte d'écrire et de communiquer. Chaque pièce traduit l'expression écrite en forme visuelle, où les gestes calligraphiques rencontrent la composition abstraite.",
+    dimensions: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "p9-6",
+    mainImage: "/work/p9/6.6.jpg",
+    detailImages: [
+      "/work/p9/30.jpg",
+      "/work/p9/31.jpg"
+    ],
+    titleEn: "Your Eyes",
+    titleFr: "Tes yeux",
+    descEn: "Two portraits focused on the gaze and perception. Through abstract representation, these works explore how we see and are seen, the window to presence.",
+    descFr: "Deux portraits centrés sur le regard et la perception. À travers la représentation abstraite, ces œuvres explorent comment nous voyons et sommes vus, la fenêtre de la présence.",
+    dimensions: "73 × 56 cm",
+    medium: "Acrylique sur papier"
+  },
+  {
+    id: "p9-7",
+    mainImage: "/work/p9/7.7.jpg",
+    detailImages: [
+      "/work/p9/32.jpg",
+      "/work/p9/33.jpg",
+      "/work/p9/34.jpg",
+      "/work/p9/35.jpg",
+      "/work/p9/36.jpg",
+      "/work/p9/37.jpg"
+    ],
+    titleEn: "My Beautiful Love",
+    titleFr: "Mon bel amour",
+    descEn: "Six portraits celebrating beauty and affection. Vibrant colors and flowing forms express the emotional landscape of love, where feeling becomes visible.",
+    descFr: "Six portraits célébrant la beauté et l'affection. Des couleurs vibrantes et des formes fluides expriment le paysage émotionnel de l'amour, où le sentiment devient visible.",
+    dimensions: "73 × 56 cm",
+    medium: "Acrylique sur papier"
   },
   {
     id: "p3",
@@ -144,6 +248,23 @@ const artworks: Artwork[] = [
     descEn: "An exploration of boundlessness through geometric abstraction. Forms expand and contract, suggesting cosmic rhythms and eternal cycles. This work invites contemplation on our place within the infinite dance of existence.",
     descFr: "Une exploration de l'illimité à travers l'abstraction géométrique. Les formes se dilatent et se contractent, suggérant des rythmes cosmiques et des cycles éternels. Cette œuvre invite à la contemplation sur notre place au sein de la danse infinie de l'existence.",
     dimensions: "83 × 83 cm",
+    medium: "Acrylique sur toile"
+  },
+  {
+    id: "p2",
+    mainImage: "/work/p2/p2.jpg",
+    detailImages: [
+      "/work/p2/detail/IMG_8402_result.jpg",
+      "/work/p2/detail/IMG_8404_result.jpg",
+      "/work/p2/detail/IMG_8405_result.jpg",
+      "/work/p2/detail/IMG_8406_result.jpg",
+      "/work/p2/detail/IMG_8409_result.jpg"
+    ],
+    titleEn: "Melodic Resonance",
+    titleFr: "Résonance Mélodique",
+    descEn: "An exploration of chromatic vibrations where color sings across the canvas. Inspired by the phrase 'It's with you that I want to sing,' this work captures the harmony between presence and expression, transforming emotion into visual rhythm.",
+    descFr: "Une exploration des vibrations chromatiques où la couleur chante à travers la toile. Inspirée par la phrase 'C'est avec toi que je veux chanter', cette œuvre capture l'harmonie entre présence et expression, transformant l'émotion en rythme visuel.",
+    dimensions: "100 × 30 cm",
     medium: "Acrylique sur toile"
   }
 ];
@@ -256,21 +377,13 @@ export function FeaturedWorks() {
           >
             {!mounted ? 'Work' : lang === 'fr' ? 'Œuvres' : 'Work'}
           </h2>
-          <div className="flex items-center justify-center gap-4 mt-6">
-            <motion.div 
-              animate={{ scaleX: [0, 1, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="h-px w-24 bg-linear-to-r from-transparent via-[#C9A86A] to-transparent"
-            />
-            <span className="text-sm tracking-[0.3em] text-white/50 uppercase">
-              {currentIndex + 1} / {artworks.length}
-            </span>
-            <motion.div 
-              animate={{ scaleX: [0, 1, 0] }}
-              transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
-              className="h-px w-24 bg-linear-to-r from-transparent via-[#C9A86A] to-transparent"
-            />
-          </div>
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "6rem" }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeInOut" }}
+            viewport={{ once: true }}
+            className="h-px bg-linear-to-r from-transparent via-[#C9A86A] to-transparent mx-auto mt-4"
+          />
         </motion.div>
 
         <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10">
@@ -279,7 +392,7 @@ export function FeaturedWorks() {
             <div className="relative">
               <div 
                 ref={imageRef}
-                className="relative aspect-square cursor-pointer group"
+                className="relative aspect-square group cursor-pointer"
                 onClick={openDetailView}
               >
                 <div className="absolute inset-0 bg-linear-to-br from-[#C9A86A]/20 via-transparent to-[#E6D8B4]/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-700" />
@@ -294,23 +407,21 @@ export function FeaturedWorks() {
                     alt={lang === 'fr' ? currentWork.titleFr : currentWork.titleEn}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover"
-                    priority
-                  />
+                    className="object-contain"
+                  priority
+                />
                   
-                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                    <motion.div
-                      initial={{ scale: 0, rotate: -180 }}
-                      whileHover={{ scale: 1, rotate: 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="text-white text-6xl"
-                    >
-                      +
-                    </motion.div>
-                  </div>
-                </motion.div>
-
-                <motion.button
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <motion.div
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileHover={{ scale: 1, rotate: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-white text-6xl"
+                  >
+                    +
+                  </motion.div>
+                </div>
+              </motion.div>                <motion.button
                   whileHover={{ scale: 1.1, x: -5 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={(e) => { e.stopPropagation(); handlePrev(); }}
@@ -362,7 +473,7 @@ export function FeaturedWorks() {
               <div>
                 <h3 
                   ref={titleRef}
-                  className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-4 text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
+                  className="text-2xl md:text-3xl lg:text-4xl font-black leading-tight mb-4 text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {lang === 'fr' ? currentWork.titleFr : currentWork.titleEn}
@@ -407,54 +518,6 @@ export function FeaturedWorks() {
               >
                 {lang === 'fr' ? currentWork.descFr : currentWork.descEn}
               </p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="flex flex-wrap gap-4 pt-6"
-              >
-                <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201, 168, 106, 0.3)" }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={openDetailView}
-                  className="px-8 py-4 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4] text-black font-bold rounded-full transition-all duration-300"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  {lang === 'fr' ? 'Voir les détails' : 'View Details'}
-                </motion.button>
-
-                <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  href={`https://wa.me/21629123456?text=${encodeURIComponent(
-                    (lang === 'fr' ? 'Intéressé par l\'œuvre: ' : 'Interested in artwork: ') +
-                    (lang === 'fr' ? currentWork.titleFr : currentWork.titleEn)
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full border border-white/20 transition-all duration-300"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  {lang === 'fr' ? 'Me contacter' : 'Contact Me'}
-                </motion.a>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="flex items-center gap-3 pt-4"
-              >
-                <motion.span 
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="inline-block size-3 rounded-full bg-emerald-500"
-                />
-                <span className="text-sm text-white/60">
-                  {lang === 'fr' ? 'Disponible à l\'achat' : 'Available for Purchase'}
-                </span>
-              </motion.div>
             </div>
           </div>
         </div>
@@ -575,18 +638,6 @@ export function FeaturedWorks() {
                           {currentWork.medium}
                         </span>
                       )}
-                      <motion.div
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20"
-                      >
-                        <motion.span
-                          animate={{ scale: [1, 1.3, 1] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                          className="inline-block size-1.5 rounded-full bg-emerald-500"
-                        />
-                        <span>{lang === 'fr' ? 'Disponible' : 'Available'}</span>
-                      </motion.div>
                     </div>
                   </div>
 
@@ -599,22 +650,6 @@ export function FeaturedWorks() {
                   >
                     {lang === 'fr' ? currentWork.descFr : currentWork.descEn}
                   </p>
-
-                  {/* Contact Button - Compact */}
-                  <motion.a
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    whileTap={{ scale: 0.97 }}
-                    href={`https://wa.me/21629123456?text=${encodeURIComponent(
-                      (lang === 'fr' ? 'Intéressé par l\'œuvre: ' : 'Interested in artwork: ') +
-                      (lang === 'fr' ? currentWork.titleFr : currentWork.titleEn)
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full px-5 py-2.5 bg-linear-to-r from-[#C9A86A] to-[#E6D8B4] text-black text-center font-bold rounded-full transition-all duration-200 text-xs md:text-sm"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    {lang === 'fr' ? 'Me contacter' : 'Contact Me'}
-                  </motion.a>
                 </div>
               </div>
             </motion.div>

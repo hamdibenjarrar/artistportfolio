@@ -79,8 +79,8 @@ export default function JardinDAfrique() {
         en: "There are projects like no other. Projects where art becomes silence, light, humanity.",
       },
       p2: {
-        fr: "Jardin d'Afrique fait partie de ces œuvres rares. Un lieu pensé comme un sanctuaire pour les migrants disparus, imaginé et conçu par l'artiste et maître calligraphe Rachid Koraïchi.",
-        en: "Jardin d'Afrique is one of these rare works. A place conceived as a sanctuary for missing migrants, imagined and designed by artist and master calligrapher Rachid Koraïchi.",
+        fr: "Jardin d'Afrique fait partie de ces œuvres rares. Un lieu pensé comme un sanctuaire pour les migrants disparus, imaginé et conçu par l'artiste Rachid Koraïchi.",
+        en: "Jardin d'Afrique is one of these rare works. A place conceived as a sanctuary for missing migrants, imagined and designed by artist Rachid Koraïchi.",
       },
       p3: {
         fr: "Yassine y a trouvé un espace où son regard d'artiste pouvait rencontrer quelque chose de plus grand que lui : un projet qui touche, qui marque, qui transforme.",
@@ -198,7 +198,7 @@ export default function JardinDAfrique() {
   };
 
   const portraitImages = [
-    { src: "/yr.jpeg", name: "Yassine Radhouani" },
+    { src: "/yr.jpeg", name: "Rachid Koraïchii" },
     { src: "/yd.jpeg", name: "Dhafer Youssef" },
     { src: "/ya.jpeg", name: "Andra Matin" },
     { src: "/yy.jpeg", name: "Yahya Hussein Abdallah" },
