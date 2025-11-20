@@ -72,7 +72,7 @@ export default function ProjectHighlightSection() {
           {/* Quote */}
           <div ref={quoteRef}>
             <motion.blockquote
-              className="font-display text-2xl md:text-3xl lg:text-4xl text-[#E6D8B4] mb-8 leading-relaxed italic"
+              className="font-display text-xl md:text-3xl lg:text-4xl text-[#E6D8B4] mb-8 leading-relaxed italic"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}

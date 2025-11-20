@@ -426,9 +426,9 @@ export function P9Carousel() {
                 <span className="text-xl leading-none">×</span>
               </motion.button>
 
-              <div className="flex flex-col md:flex-row h-full max-h-[85vh] md:max-h-[80vh]">
+              <div className="flex flex-col-reverse md:flex-row h-full max-h-[85vh] md:max-h-[80vh]">
                 {/* Left: Image Display - 60% */}
-                <div className="relative bg-linear-to-br from-[#fafafa] to-white p-4 md:p-8 flex items-center justify-center md:w-3/5 min-h-[50vh] md:min-h-0">
+                <div className="relative bg-linear-to-br from-[#fafafa] to-white p-4 md:p-8 flex items-center justify-center md:w-3/5 min-h-[40vh] md:min-h-0">
                   <div ref={imageRef} className="relative w-full aspect-3/4 md:h-full md:aspect-auto">
                     <img
                       key={currentPortrait.src}
