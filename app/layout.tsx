@@ -3,6 +3,7 @@ import { Playfair_Display, Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/i18n/LanguageProvider";
 import ConditionalFooter from "@/components/ConditionalFooter";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const playfair = Playfair_Display({
   variable: "--font-display",
@@ -38,8 +39,12 @@ export const metadata: Metadata = {
     alternateLocale: "en_US",
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/logo.png',
+    shortcut: '/favicon.ico',
   },
 };
 
@@ -50,17 +55,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="scroll-smooth" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/logo.png" type="image/png" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/logo.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
       <body className={`${playfair.variable} ${oswald.variable} ${inter.variable} antialiased bg-[#0a0a0a] text-white font-body` }>
         <LanguageProvider>
           <main>{children}</main>
           <ConditionalFooter />
         </LanguageProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
