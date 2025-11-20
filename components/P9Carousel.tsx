@@ -436,6 +436,8 @@ export function P9Carousel() {
                       fill
                       sizes="(max-width: 768px) 90vw, 50vw"
                       className="object-contain"
+                      priority
+                      unoptimized
                     />
                   </div>
 

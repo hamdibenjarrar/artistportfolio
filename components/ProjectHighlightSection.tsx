@@ -59,7 +59,7 @@ export default function ProjectHighlightSection() {
     >
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
+        className="absolute inset-0 bg-cover bg-top bg-no-repeat scale-100"
         style={{ backgroundImage: "url(/book.jpg)" }}
       />
 
