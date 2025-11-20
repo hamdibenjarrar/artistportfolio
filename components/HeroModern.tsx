@@ -80,7 +80,7 @@ export default function HeroModern() {
               style={{ fontFamily: "var(--font-display)" }}
             >
               <span className="block text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-white">
-                {!mounted ? 'Yassine Radhouani - Architecte et Artiste' : lang === 'fr' ? 'Yassine Radhouani - Architecte et Artiste' : 'Yassine Radhouani - Architect and Artist'}
+                Yassine Radhouani
               </span>
             </motion.h1>
 
@@ -127,7 +127,7 @@ export default function HeroModern() {
               style={{ fontFamily: "var(--font-display)" }}
             >
               <span className="block text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-white">
-                {!mounted ? 'Yassine Radhouani - Architecte et Artiste' : lang === 'fr' ? 'Yassine Radhouani - Architecte et Artiste' : 'Yassine Radhouani - Architect and Artist'}
+                Yassine Radhouani
               </span>
             </h1>
 
