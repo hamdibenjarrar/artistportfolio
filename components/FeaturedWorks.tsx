@@ -565,7 +565,7 @@ export function FeaturedWorks() {
                       className="relative w-full aspect-square md:aspect-4/3"
                     >
                       <NextImage
-                        src={currentWork.detailImages[detailImageIndex] || currentWork.mainImage}
+                        src={currentWork.id.startsWith('p9-') ? currentWork.mainImage : (currentWork.detailImages[detailImageIndex] || currentWork.mainImage)}
                         alt={`${lang === 'fr' ? 'Détail' : 'Detail'} ${detailImageIndex + 1}`}
                         fill
                         sizes="(max-width: 768px) 100vw, 700px"
@@ -575,7 +575,7 @@ export function FeaturedWorks() {
                   </AnimatePresence>
 
                   {/* Navigation Arrows */}
-                  {currentWork.detailImages.length > 1 && (
+                  {!currentWork.id.startsWith('p9-') && currentWork.detailImages.length > 1 && (
                     <>
                       <motion.button
                         whileHover={{ scale: 1.15, x: -4 }}
@@ -602,11 +602,13 @@ export function FeaturedWorks() {
                       </motion.button>
 
                       {/* Image Counter */}
-                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full">
-                        <span className="text-white text-xs font-medium">
-                          {detailImageIndex + 1} / {currentWork.detailImages.length}
-                        </span>
-                      </div>
+                      {!currentWork.id.startsWith('p9-') && (
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full">
+                          <span className="text-white text-xs font-medium">
+                            {detailImageIndex + 1} / {currentWork.detailImages.length}
+                          </span>
+                        </div>
+                      )}
                     </>
                   )}
                 </div>
