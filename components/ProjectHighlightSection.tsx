@@ -53,62 +53,75 @@ export default function ProjectHighlightSection() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full min-h-[70vh] flex items-end justify-center overflow-hidden pb-16"
-    >
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-top bg-no-repeat scale-100"
-        style={{ backgroundImage: "url(/book.jpg)" }}
-      />
+    <>
+      <section
+        ref={sectionRef}
+        className="relative w-full min-h-[70vh] flex items-end justify-center overflow-hidden pb-16"
+      >
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-top bg-no-repeat scale-100"
+          style={{ backgroundImage: "url(/book.jpg)" }}
+        />
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/60" />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/60" />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
-        {/* Quote */}
-        <div ref={quoteRef}>
-          <motion.blockquote
-            className="font-display text-2xl md:text-3xl lg:text-4xl text-[#E6D8B4] mb-8 leading-relaxed italic"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            {lang === "fr"
-              ? "« Là où la mémoire devient lumière, une nouvelle page s'ouvre. »"
-              : "« Where memory becomes light, a new page opens. »"}
-          </motion.blockquote>
-        </div>
-
-        {/* CTA Button */}
-        <div ref={ctaRef}>
-          <Link href="/jardin-d-afrique">
-            <motion.button
-              className="
-                px-8 py-3 
-                bg-[#C9A86A] 
-                text-[#0a0a0a] 
-                font-heading 
-                text-base 
-                tracking-wide 
-                uppercase 
-                transition-all 
-                duration-300
-                hover:brightness-110
-                hover:scale-105
-                shadow-lg
-                hover:shadow-[0_0_30px_rgba(201,168,106,0.4)]
-              "
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+          {/* Quote */}
+          <div ref={quoteRef}>
+            <motion.blockquote
+              className="font-display text-2xl md:text-3xl lg:text-4xl text-[#E6D8B4] mb-8 leading-relaxed italic"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
             >
-              {lang === "fr" ? "Découvrir" : "Discover"}
-            </motion.button>
-          </Link>
+              {lang === "fr"
+                ? "« Là où la mémoire devient lumière, une nouvelle page s'ouvre. »"
+                : "« Where memory becomes light, a new page opens. »"}
+            </motion.blockquote>
+          </div>
+
+          {/* CTA Button */}
+          <div ref={ctaRef}>
+            <Link href="/jardin-d-afrique">
+              <motion.button
+                className="
+                  px-8 py-3 
+                  bg-[#C9A86A] 
+                  text-[#0a0a0a] 
+                  font-heading 
+                  text-base 
+                  tracking-wide 
+                  uppercase 
+                  transition-all 
+                  duration-300
+                  hover:brightness-110
+                  hover:scale-105
+                  shadow-lg
+                  hover:shadow-[0_0_30px_rgba(201,168,106,0.4)]
+                "
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {lang === "fr" ? "Découvrir" : "Discover"}
+              </motion.button>
+            </Link>
+          </div>
         </div>
+      </section>
+
+      {/* Separator Line */}
+      <div className="w-full bg-[#0a0a0a] py-8">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          viewport={{ once: true }}
+          className="mx-auto max-w-4xl h-px bg-linear-to-r from-transparent via-[#C9A86A] to-transparent"
+        />
       </div>
-    </section>
+    </>
   );
 }
