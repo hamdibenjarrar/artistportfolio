@@ -38,11 +38,8 @@ export const metadata: Metadata = {
     alternateLocale: "en_US",
   },
   icons: {
-    icon: [
-      { url: '/logo.png', type: 'image/png' },
-      { url: '/favicon.ico' },
-    ],
-    apple: '/logo.png',
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
   },
 };
 

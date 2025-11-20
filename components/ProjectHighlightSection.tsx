@@ -55,23 +55,23 @@ export default function ProjectHighlightSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[70vh] flex items-center justify-center overflow-hidden"
+      className="relative w-full min-h-[70vh] flex items-end justify-center overflow-hidden pb-16"
     >
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
         style={{ backgroundImage: "url(/book.jpg)" }}
       />
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-black/60" />
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
         {/* Quote */}
         <div ref={quoteRef}>
           <motion.blockquote
-            className="font-display text-3xl md:text-5xl lg:text-6xl text-[#E6D8B4] mb-12 leading-relaxed italic"
+            className="font-display text-2xl md:text-3xl lg:text-4xl text-[#E6D8B4] mb-8 leading-relaxed italic"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
@@ -87,11 +87,11 @@ export default function ProjectHighlightSection() {
           <Link href="/jardin-d-afrique">
             <motion.button
               className="
-                px-10 py-4 
+                px-8 py-3 
                 bg-[#C9A86A] 
                 text-[#0a0a0a] 
                 font-heading 
-                text-lg 
+                text-base 
                 tracking-wide 
                 uppercase 
                 transition-all 
