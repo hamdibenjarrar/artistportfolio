@@ -1,6 +1,7 @@
 import HeroModern from "@/components/HeroModern";
 import { P9Carousel } from "@/components/P9Carousel";
 import { FeaturedWorks } from "@/components/FeaturedWorks";
+import ProjectHighlightSection from "@/components/ProjectHighlightSection";
 
 export default function HomePage() {
   return (
@@ -8,6 +9,7 @@ export default function HomePage() {
       <HeroModern />
       <FeaturedWorks />
       <P9Carousel />
+      <ProjectHighlightSection />
     </main>
   );
 }

@@ -1,10 +1,19 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 
 export default function HeroModern() {
   const { lang, setLang } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+  // Suppress hydration warning - intentional for language switching
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
   return (
     <section className="relative min-h-screen bg-black text-white overflow-hidden" aria-label="Hero">
       {/* Background Image */}
@@ -44,9 +53,9 @@ export default function HeroModern() {
             style={{ fontFamily: "var(--font-heading)" }}
           >
             <span className="flex items-center gap-1">
-              <span className={`transition ${lang==='en'?'opacity-100':'opacity-60'}`}>EN</span>
+              <span className={`transition ${!mounted || lang==='en'?'opacity-100':'opacity-60'}`}>EN</span>
               <span className="text-black/50">|</span>
-              <span className={`transition ${lang==='fr'?'opacity-100':'opacity-60'}`}>FR</span>
+              <span className={`transition ${mounted && lang==='fr'?'opacity-100':'opacity-60'}`}>FR</span>
             </span>
           </button>
         </motion.div>
@@ -71,10 +80,7 @@ export default function HeroModern() {
               style={{ fontFamily: "var(--font-display)" }}
             >
               <span className="block text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-white">
-                YASSINE
-              </span>
-              <span className="block text-white" style={{ fontFamily: "var(--font-heading)" }}>
-                RADHOUANI
+                {!mounted ? 'Yassine Radhouani - Architecte et Artiste' : lang === 'fr' ? 'Yassine Radhouani - Architecte et Artiste' : 'Yassine Radhouani - Architect and Artist'}
               </span>
             </motion.h1>
 
@@ -98,9 +104,11 @@ export default function HeroModern() {
               className="max-w-md text-base md:text-lg font-bold leading-relaxed text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]" 
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {lang === 'fr' ? 
-                'Créant des œuvres qui explorent l\'intersection entre géométrie, espace et mouvement humain à travers l\'architecture et l\'art contemporain.' :
-                'Creating works that explore the intersection of geometry, space, and human movement through architecture and contemporary art.'
+              {!mounted ? 
+                'Creating works that explore the intersection of geometry, space, and human movement through architecture and contemporary art.' :
+                lang === 'fr' ? 
+                  'Créant des œuvres qui explorent l\'intersection entre géométrie, espace et mouvement humain à travers l\'architecture et l\'art contemporain.' :
+                  'Creating works that explore the intersection of geometry, space, and human movement through architecture and contemporary art.'
               }
             </motion.p>
           </motion.div>
@@ -119,10 +127,7 @@ export default function HeroModern() {
               style={{ fontFamily: "var(--font-display)" }}
             >
               <span className="block text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-white">
-                YASSINE
-              </span>
-              <span className="block text-white" style={{ fontFamily: "var(--font-heading)" }}>
-                RADHOUANI
+                {!mounted ? 'Yassine Radhouani - Architecte et Artiste' : lang === 'fr' ? 'Yassine Radhouani - Architecte et Artiste' : 'Yassine Radhouani - Architect and Artist'}
               </span>
             </h1>
 
@@ -150,9 +155,11 @@ export default function HeroModern() {
               className="text-lg font-bold leading-relaxed max-w-md text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {lang === 'fr' ? 
-                'Créant des œuvres qui explorent l\'intersection entre géométrie, espace et mouvement humain à travers l\'architecture et l\'art contemporain.' :
-                'Creating works that explore the intersection of geometry, space, and human movement through architecture and contemporary art.'
+              {!mounted ? 
+                'Creating works that explore the intersection of geometry, space, and human movement through architecture and contemporary art.' :
+                lang === 'fr' ? 
+                  'Créant des œuvres qui explorent l\'intersection entre géométrie, espace et mouvement humain à travers l\'architecture et l\'art contemporain.' :
+                  'Creating works that explore the intersection of geometry, space, and human movement through architecture and contemporary art.'
               }
             </p>
           </motion.div>

@@ -150,6 +150,7 @@ const artworks: Artwork[] = [
 
 export function FeaturedWorks() {
   const { lang } = useLanguage();
+  const [mounted, setMounted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [detailView, setDetailView] = useState(false);
   const [detailImageIndex, setDetailImageIndex] = useState(0);
@@ -157,6 +158,11 @@ export function FeaturedWorks() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const metaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const currentWork = artworks[currentIndex];
 
@@ -248,7 +254,7 @@ export function FeaturedWorks() {
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-4 text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-[#E6D8B4]"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            {lang === 'fr' ? 'Œuvres' : 'Work'}
+            {!mounted ? 'Work' : lang === 'fr' ? 'Œuvres' : 'Work'}
           </h2>
           <div className="flex items-center justify-center gap-4 mt-6">
             <motion.div 

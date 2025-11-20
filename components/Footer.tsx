@@ -1,12 +1,16 @@
 "use client";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
-import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 export default function Footer() {
   const { lang } = useLanguage();
+  const [mounted, setMounted] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -56,7 +60,7 @@ export default function Footer() {
             className="text-3xl md:text-5xl font-black tracking-tight mb-8 md:mb-12 text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-[#E6D8B4]"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            {lang==='fr'?'À propos':'About'}
+            {!mounted ? 'À propos' : lang === 'fr' ? 'À propos' : 'About'}
           </motion.h2>
           
           <div className="space-y-6 md:space-y-8">
@@ -68,7 +72,7 @@ export default function Footer() {
               className="text-base md:text-xl leading-relaxed font-bold text-transparent bg-clip-text bg-linear-to-r from-[#C9A86A] via-white to-[#E6D8B4]"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {lang==='fr'?
+              {!mounted || lang==='fr'?
                 'Né en 1981 entre Gabès et El Kef, le regard s\'est forgé dans un univers de contrastes : le relief du Nord, la lumière du Sud. Le scoutisme a marqué l\'enfance : apprendre à écouter, à fabriquer, à créer avec les mains et à travailler en équipe. C\'est là que la curiosité pour la matière a commencé.'
                 :
                 'Born in 1981 between Gabès and El Kef, vision was forged in a universe of contrasts: the relief of the North, the light of the South. Scouting marked childhood: learning to listen, to build, to create with hands, and to work as a team. That\'s where curiosity for materials began.'
@@ -83,7 +87,7 @@ export default function Footer() {
               className="text-base md:text-xl leading-relaxed font-bold text-transparent bg-clip-text bg-linear-to-r from-[#E6D8B4] via-white to-[#C9A86A]"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {lang==='fr'?
+              {!mounted || lang==='fr'?
                 'L\'adolescence a pris des couleurs nouvelles : dessins, ateliers, culture visuelle… jusqu\'à ce que la Russie ouvre un autre chapitre — un pays de culture, d\'art et de musique qui a profondément affiné son sens du rythme visuel, de la précision et de l\'espace.'
                 :
                 'Adolescence took on new colors: drawings, workshops, visual culture... until Russia opened another chapter—a country of culture, art, and music that profoundly refined the sense of visual rhythm, precision, and space.'
@@ -106,7 +110,7 @@ export default function Footer() {
               className="text-base md:text-xl leading-relaxed font-bold text-transparent bg-clip-text bg-linear-to-r from-white via-[#C9A86A] to-white"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {lang==='fr'?
+              {!mounted || lang==='fr'?
                 'Les années ont façonné une sensibilité particulière : une manière de donner une voix aux matériaux, de faire respirer les formes, de chercher la poésie dans la construction. Certains projets ont d\'ailleurs reçu une reconnaissance internationale, notamment un travail ayant figuré parmi les références saluées par la Directrice générale de l\'UNESCO, Audrey Azoulay, ainsi que par la Fondation Aga Khan en 2022.'
                 :
                 'The years have shaped a particular sensitivity: a way of giving voice to materials, making forms breathe, seeking poetry in construction. Some projects have received international recognition, notably work featured among the references praised by UNESCO Director-General Audrey Azoulay, as well as by the Aga Khan Foundation in 2022.'
@@ -121,7 +125,7 @@ export default function Footer() {
               className="text-lg md:text-2xl font-black leading-relaxed text-[#C9A86A] italic"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              {lang==='fr'?
+              {!mounted || lang==='fr'?
                 <>
                   Chaque création porte la même intention : transformer un lieu en expérience, et une vision en émotion.
                   <br />
