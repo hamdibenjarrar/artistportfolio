@@ -151,8 +151,8 @@ export default function JardinDAfrique() {
         en: "A printed memory",
       },
       p1: {
-        fr: "Plusieurs pages du livre officiel du Aga Khan Music Award témoignent du passage de Yassine dans ce projet.",
-        en: "Several pages of the official book of the Aga Khan Music Award testify to Yassine's passage in this project.",
+        fr: "Plusieurs pages du livre officiel du Aga Khan Architecture Award témoignent du passage de Yassine dans ce projet.",
+        en: "Several pages of the official book of the Aga Khan Architecture Award testify to Yassine's passage in this project.",
       },
       p2: {
         fr: "Ces archives sont aujourd'hui une partie essentielle de son histoire artistique.",

@@ -169,8 +169,8 @@ const artworks: Artwork[] = [
       "/work/p4/detail/IMG_8346_result.jpg",
       "/work/p4/detail/IMG_8349_result.jpg"
     ],
-    titleEn: "Tribute to Hédi Habouba",
-    titleFr: "Hommage au Roi Hédi Habouba",
+    titleEn: "The King",
+    titleFr: "Le roi",
     descEn: "A portrait that transcends representation to capture the spirit of Tunisian musical heritage. Through layered textures and vibrant tones, this work celebrates the legendary musician Hédi Habouba, transforming sound into visual poetry.",
     descFr: "Un portrait qui transcende la représentation pour capturer l'esprit du patrimoine musical tunisien. À travers des textures superposées et des tons vibrants, cette œuvre célèbre le légendaire musicien Hédi Habouba, transformant le son en poésie visuelle.",
     dimensions: "130 × 90 cm",
@@ -189,8 +189,8 @@ const artworks: Artwork[] = [
     ],
     titleEn: "The Soul of Days I",
     titleFr: "L'Âme des Jours I",
-    descEn: "First piece of the trilogy 'The Soul of Days.' Arabic calligraphy of the word 'days' dissolves into abstract form, exploring the passage of time through gestural marks. Each stroke carries memory, each layer holds a moment suspended.",
-    descFr: "Première pièce de la trilogie 'L'Âme des Jours'. La calligraphie arabe du mot 'jours' se dissout en forme abstraite, explorant le passage du temps à travers des marques gestuelles. Chaque trait porte la mémoire, chaque couche retient un instant suspendu.",
+    descEn: "First piece of the trilogy 'The Soul of Days.' Arabic calligraphy dissolves into abstract form, exploring the passage of time through gestural marks. Each stroke carries memory, each layer holds a moment suspended.",
+    descFr: "Première pièce de la trilogie 'L'Âme des Jours'. La calligraphie arabe se dissout en forme abstraite, explorant le passage du temps à travers des marques gestuelles. Chaque trait porte la mémoire, chaque couche retient un instant suspendu.",
     dimensions: "83 × 83 cm",
     medium: "Acrylique sur bois",
     collection: "L'âme des jours"
@@ -217,12 +217,17 @@ const artworks: Artwork[] = [
     id: "p7",
     mainImage: "/work/p7/IMG_8209_result.jpg",
     detailImages: [
-      "/work/p7/detail/IMG_8193_result.jpg",
-      "/work/p7/detail/IMG_8196_result.jpg",
-      "/work/p7/detail/IMG_8197_result.jpg",
-      "/work/p7/detail/IMG_8200_result.jpg",
-      "/work/p7/detail/IMG_8202_result.jpg",
-      "/work/p7/detail/IMG_8203_result.jpg"
+      "/work/p7/detail/IMG_8211_result.jpg",
+      "/work/p7/detail/IMG_8212_result.jpg",
+      "/work/p7/detail/IMG_8213_result.jpg",
+      "/work/p7/detail/IMG_8214_result.jpg",
+      "/work/p7/detail/IMG_8217_result.jpg",
+      "/work/p7/detail/IMG_8219_result.jpg",
+      "/work/p7/detail/IMG_8221_result.jpg",
+      "/work/p7/detail/IMG_8223_result.jpg",
+      "/work/p7/detail/IMG_8229_result.jpg",
+      "/work/p7/detail/IMG_8233_result.jpg",
+      "/work/p7/detail/IMG_8236_result.jpg"
     ],
     titleEn: "The Soul of Days III",
     titleFr: "L'Âme des Jours III",
@@ -266,6 +271,24 @@ const artworks: Artwork[] = [
     descFr: "Une exploration des vibrations chromatiques où la couleur chante à travers la toile. Inspirée par la phrase 'C'est avec toi que je veux chanter', cette œuvre capture l'harmonie entre présence et expression, transformant l'émotion en rythme visuel.",
     dimensions: "100 × 30 cm",
     medium: "Acrylique sur toile"
+  },
+  {
+    id: "p10",
+    mainImage: "/work/foot.jpg",
+    detailImages: [
+      "/work/p7/detail/IMG_8193_result.jpg",
+      "/work/p7/detail/IMG_8196_result.jpg",
+      "/work/p7/detail/IMG_8197_result.jpg",
+      "/work/p7/detail/IMG_8200_result.jpg",
+      "/work/p7/detail/IMG_8202_result.jpg",
+      "/work/p7/detail/IMG_8203_result.jpg"
+    ],
+    titleEn: "To Find the World Again",
+    titleFr: "Pour retrouver le monde",
+    descEn: "A contemplative exploration of rediscovery and return. Through layered compositions and evocative textures, this work speaks to the journey of reconnecting with the world—a meditation on loss, memory, and the eternal search for meaning in what surrounds us.",
+    descFr: "Une exploration contemplative de la redécouverte et du retour. À travers des compositions en couches et des textures évocatrices, cette œuvre parle du voyage de reconnexion avec le monde—une méditation sur la perte, la mémoire, et la quête éternelle de sens dans ce qui nous entoure.",
+    dimensions: "Dimensions variables",
+    medium: "Technique mixte"
   }
 ];
 

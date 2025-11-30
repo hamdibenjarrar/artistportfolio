@@ -74,9 +74,9 @@ export default function Footer() {
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {!mounted || lang==='fr'?
-                'Né en 1981 entre Gabès et El Kef, le regard s\'est forgé dans un univers de contrastes : le relief du Nord, la lumière du Sud. Le scoutisme a marqué l\'enfance : apprendre à écouter, à fabriquer, à créer avec les mains et à travailler en équipe. C\'est là que la curiosité pour la matière a commencé.'
+                'Né en 1981 à Tunis, le regard s\'est forgé dans un univers de contrastes : le relief du Nord, la lumière du Sud. Le scoutisme a marqué l\'enfance : apprendre à écouter, à fabriquer, à créer avec les mains et à travailler en équipe. C\'est là que la curiosité pour la matière a commencé.'
                 :
-                'Born in 1981 between Gabès and El Kef, vision was forged in a universe of contrasts: the relief of the North, the light of the South. Scouting marked childhood: learning to listen, to build, to create with hands, and to work as a team. That\'s where curiosity for materials began.'
+                'Born in 1981 in Tunis, vision was forged in a universe of contrasts: the relief of the North, the light of the South. Scouting marked childhood: learning to listen, to build, to create with hands, and to work as a team. That\'s where curiosity for materials began.'
               }
             </motion.p>
 
@@ -161,6 +161,9 @@ export default function Footer() {
                 <p className="text-sm md:text-base text-white/90 font-medium">
                   {lang==='fr'?'École d\'Architecture de Nijni Novgorod, Russie':'École d\'Architecture de Nijni Novgorod, Russia'}
                 </p>
+                <p className="text-xs md:text-sm text-white/70 font-medium mt-1">
+                  {lang==='fr'?'Diplôme d\'architecte':'Architecture Degree'}
+                </p>
               </div>
             </motion.div>
           </div>
@@ -233,7 +236,7 @@ export default function Footer() {
             </div>
           </motion.a>
           <motion.a 
-            href="https://wa.me/21629123456" 
+            href="https://wa.me/+21625976063" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="WhatsApp" 
