@@ -244,9 +244,13 @@ export default function JardinDAfrique() {
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url(/book.jpg)" }}
+          <Image
+            src="/book.jpg"
+            alt="Background"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+            priority
           />
           <div className="absolute inset-0 bg-black/40" />
         </motion.div>
@@ -304,9 +308,12 @@ export default function JardinDAfrique() {
               className="my-8 p-8 overflow-hidden relative"
               whileHover={{ scale: 1.02 }}
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-10"
-                style={{ backgroundImage: "url(/cover.jpeg)" }}
+              <Image
+                src="/cover.jpeg"
+                alt="Award Background"
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="object-cover object-center opacity-10"
               />
               <div className="absolute inset-0 bg-linear-to-r from-[#C9A86A]/20 to-transparent" />
               <div className="relative">
@@ -334,9 +341,12 @@ export default function JardinDAfrique() {
 
       {/* Portrait Gallery */}
       <section ref={imagesRef} className="relative py-12 px-6">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-5"
-          style={{ backgroundImage: "url(/memorie.jpeg)" }}
+        <Image
+          src="/memorie.jpeg"
+          alt="Gallery Background"
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-5"
         />
         <div className="relative max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -369,13 +379,20 @@ export default function JardinDAfrique() {
       {/* Book Images - Moved Here */}
       <section className="relative py-12 overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-cover bg-center opacity-10"
-          style={{ backgroundImage: "url(/door.jpeg)" }}
+          className="absolute inset-0 opacity-10"
           initial={{ scale: 1.1 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 2 }}
-        />
+        >
+          <Image
+            src="/door.jpeg"
+            alt="Door Background"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </motion.div>
         <div className="relative max-w-3xl mx-auto px-6">
           <motion.div
             className="grid grid-cols-3 gap-4"

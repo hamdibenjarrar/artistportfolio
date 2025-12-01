@@ -23,12 +23,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>(getInitialLang);
 
   useEffect(() => {
-    // Sync with localStorage on mount in case it changed
-    const saved = localStorage.getItem("lang") as Lang | null;
-    if (saved === "en" || saved === "fr") {
-      setLangState(saved);
-    } else {
-      // Set default to localStorage if not present
+    // Set default to localStorage if not present
+    if (typeof window !== "undefined" && !localStorage.getItem("lang")) {
       localStorage.setItem("lang", "fr");
     }
   }, []);

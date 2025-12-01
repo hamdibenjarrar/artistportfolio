@@ -28,7 +28,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Yassine Radhouani - Architecture & Art Portfolio",
   description: "Discover the architectural and artistic portfolio of Yassine Radhouani. Architecture, fine art, UNESCO recognized projects, and Aga Khan Award winning collaborations.",
-  metadataBase: new URL("https://yassine-radhouani.com"),
+  metadataBase: new URL("https://www.yassineradhouani.me"),
   keywords: "architecture, art, portfolio, Yassine Radhouani, Tunisia, contemporary art, architectural design, UNESCO, Aga Khan Award",
   authors: [{ name: "Yassine Radhouani" }],
   openGraph: {
@@ -37,14 +37,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     alternateLocale: "en_US",
+    url: "https://www.yassineradhouani.me",
+    siteName: "Yassine Radhouani",
+    images: [
+      {
+        url: "/work/yas2.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Yassine Radhouani Portfolio",
+      },
+    ],
   },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
-    apple: '/logo.png',
-    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/logo.png' },
+    ],
   },
 };
 

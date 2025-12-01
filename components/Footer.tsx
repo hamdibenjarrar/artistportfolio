@@ -2,6 +2,7 @@
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function Footer() {
   const { lang } = useLanguage();
@@ -35,12 +36,17 @@ export default function Footer() {
   return (
     <footer 
       ref={footerRef} 
-      className="relative text-white w-full bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/work/foot.jpg')",
-        backgroundAttachment: 'scroll'
-      }}
+      className="relative text-white w-full"
     >
+      <div className="absolute inset-0">
+        <Image
+          src="/work/foot.jpg"
+          alt="Footer Background"
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div>
       {/* Overlay */}
       <div className="absolute inset-0 w-full h-full bg-linear-to-b from-black/85 via-black/75 to-black/90 z-0"></div>
       

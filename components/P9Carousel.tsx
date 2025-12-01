@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Portrait = {
@@ -188,11 +189,12 @@ export function P9Carousel() {
               onClick={() => openPortrait(index)}
               className="relative w-40 sm:w-44 md:w-48 lg:w-52 aspect-3/4 rounded-lg overflow-hidden border border-[#E6D8B4] bg-white shadow-sm hover:shadow-xl hover:border-[#C9A86A] transition-all duration-300 group cursor-pointer"
             >
-              <img
+              <Image
                 src={portrait.src}
                 alt={`Portrait ${portrait.number}`}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
+                fill
+                sizes="(max-width: 640px) 160px, (max-width: 768px) 176px, (max-width: 1024px) 192px, 208px"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </motion.div>
           ))}
@@ -246,11 +248,13 @@ export function P9Carousel() {
                       transition={{ duration: 0.3 }}
                       className="relative w-full h-full"
                     >
-                      <img
+                      <Image
                         src={selectedPortrait.src}
                         alt={`Portrait ${selectedPortrait.number}`}
-                        className="w-full h-full object-contain"
-                        loading="eager"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 60vw"
+                        className="object-contain"
+                        priority
                       />
                     </motion.div>
                   </AnimatePresence>

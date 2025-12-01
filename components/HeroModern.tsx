@@ -23,6 +23,7 @@ export default function HeroModern() {
           alt="Background"
           fill
           priority
+          sizes="100vw"
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-linear-to-br from-black/30 via-black/20 to-black/40"></div>

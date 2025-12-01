@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import Link from "next/link";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,10 +60,15 @@ export default function ProjectHighlightSection() {
         className="relative w-full min-h-[70vh] flex items-end justify-center overflow-hidden pb-16"
       >
         {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-top bg-no-repeat scale-100"
-          style={{ backgroundImage: "url(/book.jpg)" }}
-        />
+        <div className="absolute inset-0">
+          <Image
+            src="/book.jpg"
+            alt="Background"
+            fill
+            sizes="100vw"
+            className="object-cover object-top"
+          />
+        </div>
 
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/60" />
