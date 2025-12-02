@@ -212,7 +212,7 @@ export default function Footer() {
           viewport={{ once: true }}
         >
           <motion.a 
-            href="https://www.instagram.com/yassine.radhouani" 
+            href="https://www.instagram.com/radhouaniyassine/" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="Instagram" 
