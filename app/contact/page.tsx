@@ -1,3 +1,13 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact - Yassine Radhouani",
+  description: "Get in touch with Yassine Radhouani for artistic collaborations, architectural projects, or inquiries.",
+  alternates: {
+    canonical: "https://www.yassineradhouani.me/contact",
+  },
+};
+
 export default function ContactPage() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-12">

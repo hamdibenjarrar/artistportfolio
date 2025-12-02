@@ -4,6 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/components/i18n/LanguageProvider";
 import ConditionalFooter from "@/components/ConditionalFooter";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 
 const playfair = Playfair_Display({
   variable: "--font-display",
@@ -53,6 +54,9 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
     apple: '/favicon.ico',
   },
+  other: {
+    "google-adsense-account": "ca-pub-1629124394187689",
+  },
 };
 
 export default function RootLayout({
@@ -68,6 +72,8 @@ export default function RootLayout({
           <ConditionalFooter />
         </LanguageProvider>
         <SpeedInsights />
+        <GoogleTagManager gtmId="GTM-PJB3ZMTN" />
+        <GoogleAnalytics gaId="G-W06FSD8QPP" />
       </body>
     </html>
   );
