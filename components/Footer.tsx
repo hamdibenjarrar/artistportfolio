@@ -257,6 +257,21 @@ export default function Footer() {
             </div>
           </motion.a>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center"
+        >
+          <a 
+            href="/contact" 
+            className="inline-block px-8 py-3 border border-[#C9A86A] text-[#C9A86A] hover:bg-[#C9A86A] hover:text-black transition-all duration-300 font-heading uppercase tracking-widest text-sm"
+          >
+            {lang === 'fr' ? 'Contactez-moi' : 'Contact Me'}
+          </a>
+        </motion.div>
       </motion.section>
 
       {/* Copyright */}

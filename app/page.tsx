@@ -13,8 +13,29 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Yassine Radhouani",
+    "url": "https://www.yassineradhouani.me",
+    "jobTitle": "Artist & Architect",
+    "sameAs": [
+      "https://www.instagram.com/radhouaniyassine/",
+      "https://www.linkedin.com/in/yassine-radhouani"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Yassine Radhouani Studio"
+    },
+    "description": "Tunisian artist and architect known for abstract expressionism and Aga Khan Award-winning projects."
+  };
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <HeroModern />
       <FeaturedWorks />
       <P9Carousel />
