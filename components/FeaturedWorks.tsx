@@ -162,7 +162,6 @@ const artworks: Artwork[] = [
     id: "p4",
     mainImage: "/work/p4/IMG_8369_result.jpg",
     detailImages: [
-      "/work/p4/detail/IMG_8341_result.jpg",
       "/work/p4/detail/IMG_8342_result.jpg",
       "/work/p4/detail/IMG_8343_result.jpg",
       "/work/p4/detail/IMG_8344_result.jpg",
@@ -317,22 +316,22 @@ export function FeaturedWorks() {
     
     tl.fromTo(imageRef.current, 
       { opacity: 0, scale: 0.9, rotateY: -15 },
-      { opacity: 1, scale: 1, rotateY: 0, duration: 1.2, ease: "power3.out" }
+      { opacity: 1, scale: 1, rotateY: 0, duration: 0.6, ease: "power3.out" }
     )
     .fromTo(titleRef.current,
       { opacity: 0, x: -50, rotateX: -20 },
-      { opacity: 1, x: 0, rotateX: 0, duration: 0.8, ease: "power2.out" },
-      "-=0.8"
+      { opacity: 1, x: 0, rotateX: 0, duration: 0.4, ease: "power2.out" },
+      "-=0.4"
     )
     .fromTo(metaRef.current,
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-      "-=0.5"
+      { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
+      "-=0.2"
     )
     .fromTo(descRef.current,
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-      "-=0.4"
+      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+      "-=0.2"
     );
 
     return () => {

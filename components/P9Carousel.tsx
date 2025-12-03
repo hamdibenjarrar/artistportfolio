@@ -219,7 +219,7 @@ export function P9Carousel() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.3, ease: [0.34, 1.26, 0.64, 1] }}
-              className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded-xl md:rounded-2xl shadow-2xl overflow-hidden"
+              className="relative w-full max-w-4xl bg-white rounded-xl md:rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col md:flex-row"
               onClick={(e) => e.stopPropagation()}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
@@ -230,15 +230,14 @@ export function P9Carousel() {
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setSelectedPortrait(null)}
-                className="absolute top-2 right-2 md:top-3 md:right-3 z-20 bg-white/95 hover:bg-white backdrop-blur-sm text-[#111] rounded-full w-8 h-8 md:w-9 md:h-9 flex items-center justify-center transition-colors duration-200 shadow-lg"
+                className="absolute top-2 right-2 md:top-4 md:right-4 z-50 bg-white/90 hover:bg-white backdrop-blur-sm text-[#111] rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center transition-colors duration-200 shadow-sm border border-black/5"
                 aria-label="Close"
               >
                 <span className="text-xl leading-none">×</span>
               </motion.button>
 
-              <div className="flex flex-col md:flex-row h-full max-h-[90vh]">
-                {/* Left: Image Display with Navigation */}
-                <div className="relative bg-linear-to-br from-[#fafafa] to-white p-4 md:p-6 flex items-center justify-center md:w-3/5 h-[60vh] md:h-auto">
+              {/* Left: Image Display */}
+              <div className="relative w-full md:w-3/5 bg-[#fafafa] flex items-center justify-center h-[50vh] md:h-[80vh]">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={selectedPortrait.src}
@@ -246,14 +245,14 @@ export function P9Carousel() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.3 }}
-                      className="relative w-full h-full"
+                      className="relative w-full h-full p-4 md:p-8"
                     >
                       <Image
                         src={selectedPortrait.src}
                         alt={`Portrait ${selectedPortrait.number}`}
                         fill
                         sizes="(max-width: 768px) 100vw, 60vw"
-                        className="object-contain"
+                        className="object-contain drop-shadow-xl"
                         priority
                       />
                     </motion.div>
@@ -263,67 +262,59 @@ export function P9Carousel() {
                   <motion.button
                     whileHover={{ scale: 1.1, x: -3 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={prevPortrait}
-                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm text-[#111] p-2 md:p-2.5 rounded-full transition-all duration-200 shadow-lg"
+                    onClick={(e) => { e.stopPropagation(); prevPortrait(); }}
+                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white backdrop-blur-sm text-[#111] p-2 rounded-full transition-all duration-200 shadow-sm border border-black/5"
                     aria-label="Previous"
                   >
-                    <svg
-                      className="w-4 h-4 md:w-5 md:h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M15 19l-7-7 7-7"
-                      />
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                   </motion.button>
 
                   <motion.button
                     whileHover={{ scale: 1.1, x: 3 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={nextPortrait}
-                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm text-[#111] p-2 md:p-2.5 rounded-full transition-all duration-200 shadow-lg"
+                    onClick={(e) => { e.stopPropagation(); nextPortrait(); }}
+                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white backdrop-blur-sm text-[#111] p-2 rounded-full transition-all duration-200 shadow-sm border border-black/5"
                     aria-label="Next"
                   >
-                    <svg
-                      className="w-4 h-4 md:w-5 md:h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M9 5l7 7-7 7"
-                      />
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </motion.button>
 
                   {/* Counter */}
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs md:text-sm font-medium text-[#111] shadow-md">
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-[#111] shadow-sm border border-black/5">
                     {currentIndex + 1} / {allPortraits.length}
                   </div>
                 </div>
 
                 {/* Right: Info Panel */}
-                <div className="p-4 md:p-6 bg-white md:w-2/5 flex items-center">
-                  <div className="w-full space-y-3 md:space-y-4">
-                    <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1.5 bg-[#f5f5f5] text-[#111] text-xs md:text-sm rounded-full border border-[#E6D8B4]">
-                        73 × 56 cm
-                      </span>
-                      <span className="px-3 py-1.5 bg-[#f5f5f5] text-[#111] text-xs md:text-sm rounded-full border border-[#E6D8B4]">
-                        Acrylique sur papier
-                      </span>
+                <div className="w-full md:w-2/5 bg-white p-6 md:p-10 flex flex-col justify-center border-t md:border-t-0 md:border-l border-black/5">
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-2xl md:text-3xl font-bold text-[#111] mb-2" style={{ fontFamily: "var(--font-display)" }}>
+                          Portrait {selectedPortrait.number}
+                        </h3>
+                        <div className="h-1 w-12 bg-[#C9A86A] rounded-full" />
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 text-sm text-[#666]">
+                          <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[#f5f5f5] text-[#111]">
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+                          </span>
+                          <span>73 × 56 cm</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-[#666]">
+                          <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[#f5f5f5] text-[#111]">
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+                          </span>
+                          <span>Acrylique sur papier</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </motion.div>
           </motion.div>
         )}
