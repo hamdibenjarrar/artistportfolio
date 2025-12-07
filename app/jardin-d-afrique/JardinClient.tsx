@@ -205,7 +205,7 @@ export default function JardinDAfrique() {
     { src: "/ydd.jpeg", name: "David García Martínez" },
     { src: "/ma.jpeg", name: "Mohammad Mousavi" },
   ];
-  const bookImages = ["/zoom.jpeg", "/cover.jpeg", "/zoom.jpeg"];
+  const bookImages = ["/zoom.jpeg", "/cover.jpeg", "/bookimage.jpeg"];
 
   if (!mounted) {
     return null;
@@ -405,7 +405,7 @@ export default function JardinDAfrique() {
             {bookImages.map((src, idx) => (
               <motion.div
                 key={idx}
-                className="relative aspect-3/4 overflow-hidden"
+                className="relative aspect-3/4 overflow-hidden bg-black/20 rounded-sm"
                 whileHover={{ scale: 1.05 }}
               >
                 <Image
@@ -413,9 +413,8 @@ export default function JardinDAfrique() {
                   alt={`Book ${idx + 1}`}
                   fill
                   sizes="33vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
-                <div className="absolute inset-0 bg-black/20" />
               </motion.div>
             ))}
           </motion.div>
