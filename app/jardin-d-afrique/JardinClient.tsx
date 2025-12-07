@@ -205,7 +205,7 @@ export default function JardinDAfrique() {
     { src: "/ydd.jpeg", name: "David García Martínez" },
     { src: "/ma.jpeg", name: "Mohammad Mousavi" },
   ];
-  const bookImages = ["/zoom.jpeg", "/cover.jpeg", "/bookimage.jpeg"];
+  const bookImages = ["/cover.jpeg", "/zoom.jpeg", "/bookimage.jpeg"];
 
   if (!mounted) {
     return null;
