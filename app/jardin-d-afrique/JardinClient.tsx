@@ -205,7 +205,7 @@ export default function JardinDAfrique() {
     { src: "/ydd.jpeg", name: "David García Martínez" },
     { src: "/ma.jpeg", name: "Mohammad Mousavi" },
   ];
-  const bookImages = ["/cover.jpeg", "/zoom.jpeg", "/bookimage.jpeg"];
+  const bookImages = ["/zoom.jpeg", "/cover.jpeg", "/ag.jpeg"];
 
   if (!mounted) {
     return null;
@@ -394,9 +394,9 @@ export default function JardinDAfrique() {
             className="object-cover object-center"
           />
         </motion.div>
-        <div className="relative max-w-3xl mx-auto px-6">
+        <div className="relative max-w-5xl mx-auto px-6">
           <motion.div
-            className="grid grid-cols-3 gap-4"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -405,15 +405,21 @@ export default function JardinDAfrique() {
             {bookImages.map((src, idx) => (
               <motion.div
                 key={idx}
-                className="relative aspect-3/4 overflow-hidden bg-black/20 rounded-sm"
-                whileHover={{ scale: 1.05 }}
+                className={`relative aspect-3/4 overflow-hidden bg-black/5 rounded-sm shadow-lg ${idx === 1 ? 'bg-black/20' : ''}`}
+                whileHover={{ scale: 1.02 }}
               >
                 <Image
                   src={src}
                   alt={`Book ${idx + 1}`}
                   fill
-                  sizes="33vw"
-                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className={
+                    idx === 0 
+                      ? "object-cover object-left" 
+                      : idx === 1 
+                        ? "object-contain p-2" 
+                        : "object-cover"
+                  }
                 />
               </motion.div>
             ))}
