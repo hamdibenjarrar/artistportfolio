@@ -203,8 +203,9 @@ export default function JardinDAfrique() {
     { src: "/ya.jpeg", name: "Andra Matin" },
     { src: "/yy.jpeg", name: "Yahya Hussein Abdallah" },
     { src: "/ydd.jpeg", name: "David García Martínez" },
+    { src: "/ma.jpeg", name: "Mohammad Mousavi" },
   ];
-  const bookImages = ["/bookimage.jpeg", "/cover.jpeg", "/zoom.jpeg"];
+  const bookImages = ["/zoom.jpeg", "/cover.jpeg", "/zoom.jpeg"];
 
   if (!mounted) {
     return null;
@@ -349,7 +350,7 @@ export default function JardinDAfrique() {
           className="object-cover object-center opacity-5"
         />
         <div className="relative max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {portraitImages.map((image, idx) => (
               <motion.div
                 key={idx}
