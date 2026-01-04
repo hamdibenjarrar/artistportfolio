@@ -21,7 +21,7 @@ export default function HomePage() {
     "jobTitle": "Artist & Architect",
     "sameAs": [
       "https://www.instagram.com/radhouaniyassine/",
-      "https://www.linkedin.com/in/yassine-radhouani"
+      "www.linkedin.com/in/radhouani-yassine-533a42a2"
     ],
     "worksFor": {
       "@type": "Organization",

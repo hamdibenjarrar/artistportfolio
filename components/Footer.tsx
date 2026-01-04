@@ -227,7 +227,7 @@ export default function Footer() {
             </div>
           </motion.a>
           <motion.a 
-            href="https://www.linkedin.com/in/yassine-radhouani" 
+            href="www.linkedin.com/in/radhouani-yassine-533a42a2" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="LinkedIn" 
